@@ -47,15 +47,15 @@
 
   services.xserver = {
     enable = true;
+    exportConfiguration = true;
     layout = "us";
     xkbVariant = "altgr-intl";
     xkbOptions = "caps:swapescape";
 
     libinput = {
       enable = true;
-      tapping = false;
-      disableWhileTyping = true;
-      naturalScrolling = true;
+      touchpad.tapping = false;
+      touchpad.disableWhileTyping = true;
     };
 
     # so basically this is a hack to get i3 to show up as a session
