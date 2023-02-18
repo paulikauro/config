@@ -1,0 +1,1 @@
+pactl load-module module-remap-sink master="alsa_output.usb-Focusrite_Scarlett_2i2_USB_Y8RK07Y15775DE-00.analog-stereo" sink_name=mono sink_properties="device.description='Mono'" channels=2 channel_map=mono,mono

@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/data" =
+    { device = "/dev/disk/by-uuid/bebee1f5-2944-4377-95be-d7fa9e1f26ce";
+      fsType = "ext4";
+    };
+
   swapDevices = [ ];
 
 }
