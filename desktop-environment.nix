@@ -16,7 +16,6 @@ with pkgs.lib.attrsets;
     calibre
     # TODO: is this needed?
     networkmanagerapplet
-    keepassxc
     libnotify
     pavucontrol
     # libreoffice
@@ -119,10 +118,15 @@ with pkgs.lib.attrsets;
     extraConfig = "bindsym --release Print exec --no-startup-id ~/.local/bin/screenshot.sh";
     config =
       let
+        keepassxc = (pkgs.keepassxc.override {
+          # keeshare likes to clutter the config file with a public/private (!) key pair xml mess
+          withKeePassKeeShare = false;
+          withKeePassNetworking = false;
+        });
         mod = "Mod4";
         terminal = "xfce4-terminal";
         launcher = "${pkgs.rofi}/bin/rofi -show run";
-        passwordManager = "${pkgs.keepassxc}/bin/keepassxc";
+        passwordManager = "${keepassxc}/bin/keepassxc";
         prefixWithMod = mapAttrs' (name: value: { name = "${mod}+${name}"; value = value; });
         workspaceNames = [
           "0: misc"
