@@ -1,5 +1,5 @@
 # TODO: remove hardcoded things like hostname, username, ...
-{ config, pkgs, ... }:
+{ config, pkgs, theUsername, ... }:
 {
   # TODO: packages-module?
   imports = [
@@ -28,7 +28,8 @@
     ];
     plymouth = {
       enable = true;
-      theme = "breeze";
+      # set by stylix?
+      # theme = "breeze";
     };
     consoleLogLevel = 0;
     initrd = {
@@ -91,7 +92,8 @@
 
   hardware.openrazer = {
     enable = true;
-    users = [ "testuser" ];
+    users = [ theUsername ];
+
   };
 
   #services.pipewire = {
@@ -134,7 +136,7 @@
     # TODO: autoLogin?
   };
 
-  users.users.testuser = {
+  users.users.${theUsername} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "network-manager" "adbusers" "dialout" ];
   };

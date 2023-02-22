@@ -9,9 +9,8 @@ with pkgs.lib.attrsets;
   imports = [ ./development.nix ./logseq ./firefox ];
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    # TODO: nerd fonts?
     # (nerdfonts.override { fonts = ["JetBrainsMono"]; })
-    jetbrains-mono
+    # jetbrains-mono
     xfce.xfce4-terminal
     calibre
     # TODO: is this needed?
@@ -47,6 +46,7 @@ with pkgs.lib.attrsets;
     feh
     simplescreenrecorder
     steam-run
+    age
     # zoom-us
     # wine
     # winetricks
@@ -102,7 +102,8 @@ with pkgs.lib.attrsets;
       enable = true;
       settings = {
         global = {
-          font = "JetBrains Mono 10";
+          # stylix
+          # font = "JetBrains Mono 10";
           max_icon_size = 50;
         };
       };
@@ -124,7 +125,7 @@ with pkgs.lib.attrsets;
           withKeePassNetworking = false;
         });
         mod = "Mod4";
-        terminal = "xfce4-terminal";
+        terminal = "${pkgs.kitty}/bin/kitty";
         launcher = "${pkgs.rofi}/bin/rofi -show run";
         passwordManager = "${keepassxc}/bin/keepassxc";
         prefixWithMod = mapAttrs' (name: value: { name = "${mod}+${name}"; value = value; });
@@ -159,7 +160,8 @@ with pkgs.lib.attrsets;
           titlebar = false;
           border = 0;
         };
-        fonts = [ "JetBrains Mono 10" ];
+        # stylix
+        # fonts = [ "JetBrains Mono 10" ];
         /*gaps = {
           inner = 10;
           outer = 5;

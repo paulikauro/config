@@ -8,26 +8,34 @@
     nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    impermanence.url = "github:nix-community/impermanence";
+    stylix.url = "github:danth/stylix";
+    base16-schemes = {
+        url = "github:tinted-theming/base16-schemes";
+        flake = false;
+    };
     arkenfox-nixos.url = "github:dwarfmaster/arkenfox-nixos";
   };
-  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, arkenfox-nixos }@args:
+  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, stylix, base16-schemes, arkenfox-nixos }@args:
     let
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
+      theUsername = "testuser";
+      dataModules = import ./data.nix;
     in
     {
       nixosConfigurations.thonkpad = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        # specialArgs = args;
+        specialArgs = { inherit theUsername; } // args;
         modules = [
           home-manager.nixosModules.home-manager
+          impermanence.nixosModules.impermanence
+          dataModules.nixosModule
           # NOTE: the thinkpad-e14-amd module, among other things,
           # - sets the kernel parameter iommu=soft (which is unnecessary for me)
           # - enables the fstrim service (which might be bad for disk encryption?)
           nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
           ./thonkpad.nix
+          stylix.nixosModules.stylix
+          ./styling.nix
           ({ pkgs, ... }: {
             nix = {
               registry.nixpkgs.flake = nixpkgs;
@@ -50,29 +58,32 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = {
-                config-dir = "/home/testuser/config";
-              };
-              users.testuser = { pkgs, ... }: {
+                config-dir = "/etc/nixos";
+                inherit theUsername;
+              } // args;
+              users.${theUsername} = { pkgs, ... }: {
                 imports = [
                   ./desktop-environment.nix
+                  impermanence.nixosModules.home-manager.impermanence
+                  dataModules.homeModule
                   arkenfox-nixos.hmModules.arkenfox
+                  (_: { stylix.targets.vscode.enable = false; })
+                  ./kak-stylix.nix
                 ];
                 # TODO: cleanup
                 home.stateVersion = "22.11";
-                home.homeDirectory = "/home/testuser";
-                # home.username = "testuser"; # not needed?
+                home.homeDirectory = "/home/${theUsername}";
+                # home.username = theUsername; # not needed?
                 home.packages = with pkgs; [
-                  # qt5Full
                   openssl
                   openssl.dev
+                  kopia
                   cmake
                   libglvnd
                   glxinfo
                   jq
                   nix-index
-                  # gnome3.gnome-system-monitor
                   emacs
-                  # minecraft
                   prismlauncher
                   cryptsetup
                   # openjdk

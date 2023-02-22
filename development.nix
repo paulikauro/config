@@ -1,10 +1,18 @@
 { config, pkgs, ... }:
+let
+  editor = "kak";
+  tomlFormat = pkgs.formats.toml {};
+in
 {
+  imports = [
+    ./kakoune.nix
+  ];
   # TODO bind neovim path?
   home.packages = with pkgs; [
     ghostscript
     clojure
     clojure-lsp
+    nil
     haskell-language-server
     ghc
     maven
@@ -23,12 +31,19 @@
     openssl
     sqlite
     coq
+    nodePackages.purescript-language-server
+    nodePackages.purs-tidy
     purescript
     spago
     dhall
     dhall-lsp-server
     # agda
   ];
+  home.shellAliases = {
+    upnix = "sudo nixos-rebuild switch -v --flake /etc/nixos";
+    ednix = "( cd /etc/nixos && ${editor} )";
+    e = editor;
+  };
   # gh issue: whickey.show
   # settings.jsonc: normal/visual non recursive
   # - space: vspacecode.space
@@ -46,7 +61,7 @@
       userName = "Pauli Kauro";
       userEmail = "3965357+paulikauro@users.noreply.github.com";
       extraConfig = {
-        core.editor = "vim";
+        core.editor = editor;
         pull.rebase = false;
       };
     };
@@ -62,6 +77,9 @@
     bash = {
       enable = true;
       historyControl = [ "ignoredups" "ignorespace" ];
+    };
+    kitty = {
+      enable = true;
     };
     vscode = {
       enable = true;

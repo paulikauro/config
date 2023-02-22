@@ -29,11 +29,17 @@ No legacy fallback: disable CSM (Compatibility Support Module)
 
 Use PCR 7 for system encryption; this PCR changes when UEFI SecureBoot configuration changes (keys or other)
 
-No key migration for TPM!
+No key migration for TPM! This means that the SRK's (Storage Root Key) private key is never exposed anywhere outside the TPM.
 
 # threats
 - realistic: someone steals laptop
-- 
+
+# goals
+- type only a single password on boot
+- also require TPM PCR 7 to match
+- also possibly USB
+
+systemd-cryptenroll --tpm2-with-pin
 
 # logseq
 - Ctrl+Shift+P and "Install from plugins.edn" to finish installation
