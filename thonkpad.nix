@@ -136,10 +136,15 @@
     # TODO: autoLogin?
   };
 
+  users.mutableUsers = false;
   users.users.${theUsername} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "network-manager" "adbusers" "dialout" ];
+    # it's hashed
+    passwordFile = "/local/password";
   };
-  system.stateVersion = "21.03"; # Did you read the comment? I didn't.
+  # lock root password
+  users.users.root.hashedPassword = "!";
+  system.stateVersion = "23.05"; # Did you read the comment? I didn't.
 }
 

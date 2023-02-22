@@ -22,8 +22,7 @@
             "/etc/secureboot"
           ];
           files = [
-            # idk, apparently this is generated before it is mounted
-            # "/etc/machine-id"
+            "/etc/machine-id"
           ];
         };
       };
