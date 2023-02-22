@@ -38,7 +38,7 @@
     };
     # TODO: something
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = [ "ntfs" "btrfs" ];
     tmpOnTmpfs = true;
   };
 

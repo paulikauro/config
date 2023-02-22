@@ -77,6 +77,7 @@
                 home.packages = with pkgs; [
                   openssl
                   openssl.dev
+                  nvme-cli
                   kopia
                   cmake
                   libglvnd

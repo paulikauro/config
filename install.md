@@ -41,6 +41,68 @@ No key migration for TPM! This means that the SRK's (Storage Root Key) private k
 
 systemd-cryptenroll --tpm2-with-pin
 
+# preparations
+## Disk erasure
+```sh
+# $disk = nvme disk (/dev/nvme1n1)
+nvme format -s 2 $disk
+# blkdiscard --secure was not supported
+blkdiscard $disk
+```
+Might also want to fill the drive with random data and disable TRIM.
+I didn't. This makes it possible to see certain things (like filesystem type) without the encryption key.
+
+## USB boot stick
+```sh
+# $usb = usb stick (/dev/sdb)
+fdisk $usb
+# g (GPT), n +1GB, t 1 (EFI), w
+mkfs.fat -F 32 /dev/sdb1
+mkdir mnt
+mount $usb mnt
+fatlabel $usb USBOOT # pun
+```
+
+## LUKS
+```sh
+cryptsetup luksFormat --header mnt/header.img $disk
+# forgot --allow-discards, so add it:
+cryptsetup --allow-discards open --header mnt/header.img $disk notroot
+cryptsetup --allow-discards --persistent refresh --header mnt/header.img notroot
+# check for discard flag
+cryptsetup luksDump --header mnt/header.img $disk
+
+umount mnt
+rmdir mnt
+```
+
+## File system
+```sh
+# root on tmpfs
+mount -t tmpfs none /mnt
+mkdir -p /mnt{boot,persist,local,notroot}
+mount $usb /mnt/boot
+
+# main file system
+mkfs.btrfs -L notroot /dev/mapper/notroot
+mount /dev/mapper/notroot /mnt/notroot
+cd /mnt/notroot
+btrfs subvolume create nix
+btrfs subvolume create persist
+btrfs subvolume create local
+cd /mnt
+sudo umount notroot
+mount -o subvol=nix,noatime /dev/mapper/notroot /mnt/nix
+mount -o subvol=persist,noatime /dev/mapper/notroot /mnt/persist
+mount -o subvol=local,noatime /dev/mapper/notroot /mnt/local
+```
+
+## Generate hardware config
+```sh
+nixos-generate-config --root /mnt
+```
+
 # logseq
 - Ctrl+Shift+P and "Install from plugins.edn" to finish installation
 - [ ] TODO: nix it?
+
