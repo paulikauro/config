@@ -39,6 +39,8 @@
           allowOther = true;
           directories = [
             ".config/discord"
+            ".config/kopia"
+            ".ssh"
           ];
         };
       };
