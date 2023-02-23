@@ -11,7 +11,9 @@
       kernelModules = [ ];
       luks.devices.notroot = {
         device = "/dev/nvme1n1";
-        header = "/boot/header.img";
+        header = "/dev/disk/by-uuid/513711c2-54bf-467d-bb9d-4d99cf93d4ce";
+        keyFile = "/dev/disk/by-partuuid/dde9cf5b-ee24-9e41-8afd-3e323e39e7ab";
+        keyFileSize = 64;
         # this is in the header, but whatever
         allowDiscards = true;
       };
@@ -29,9 +31,8 @@
     };
 
     "/boot" =
-    { device = "/dev/disk/by-uuid/5850-7AA5";
+    { device = "/dev/nvme0n1p4";
       fsType = "vfat";
-      neededForBoot = true;
     };
 
     "/nix" =
@@ -40,7 +41,6 @@
       options = [ "noatime" "subvol=nix" ];
       neededForBoot = true;
     };
-
 
     "/persist" =
     { device = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
@@ -52,8 +52,14 @@
     "/local" =
     { device = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
       fsType = "btrfs";
-      options = [ "subvol=local" ];
+      options = [ "noatime" "subvol=local" ];
       neededForBoot = true;
+    };
+
+    "/var/log" =
+    { device = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
+      fsType = "btrfs";
+      options = [ "noatime" "subvol=log" ];
     };
   };
 

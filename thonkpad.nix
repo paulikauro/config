@@ -96,6 +96,15 @@
 
   };
 
+  security.sudo = {
+    enable = true;
+    # disable lecture, since otherwise it is shown once after every boot,
+    # since lectured users are not persisted (/var/db/sudo/lectured/<user>)
+    extraConfig = ''
+    Defaults lecture = never
+    '';
+  };
+
   #services.pipewire = {
   #  enable = true;
   #  alsa = {

@@ -105,7 +105,20 @@
         # SanitizeOnShutdown is covered by arkenfox
         SearchBar = "unified";
         SearchEngines = {
-          # Add = [ ];
+          Add = [
+            {
+              Name = "Nix Options";
+              URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
+              "Method" = "GET";
+              "Alias" = "no";
+            }
+            {
+              Name = "Nix Packages";
+              URLTemplate = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
+              "Method" = "GET";
+              "Alias" = "np";
+            }
+          ];
           Default = "DuckDuckGo";
           PreventInstalls = true;
           Remove = [ "Google" "Amazon.com" "Bing" "eBay" "Wikipedia (en)" ];
@@ -159,10 +172,10 @@
         };
         "0800" = {
           enable = true;
-          # tab to search
-          "0808".enable = true;
+          # disable tab to search
+          "0808"."browser.urlbar.suggest.engines".enable = true;
           # no visited link coloring
-          "0820".enable = true;
+          "0820"."layout.css.visited_links_enabled".enable = true;
         };
         "0900".enable = true;
         "1000".enable = true;
@@ -189,17 +202,18 @@
         "network.protocol-handler.external.mailto" = false;
         # disable websites from messing with keybindings (GitHub likes to grab Ctrl+K to itself, which I use to search)
         "permissions.default.shortcuts" = 2;
+        # disable suggestions in urlbar
+        "browser.urlbar.suggest.bookmark" = false;
+        "browser.urlbar.suggest.engines" = false;
+        "browser.urlbar.suggest.history" = false;
+        "browser.urlbar.suggest.openpage" = false;
+        "browser.urlbar.suggest.topsites" = false;
         #   "browser.bookmarks.defaultLocation" = "unfiled";
-        #   "browser.discovery.enabled" = false;
         #   "browser.download.panel.shown" = true;
-        # why?
-        #   "browser.search.region" = "FI";
         # ugh
         #   "browser.uiCustomization.state" = "{\"placements\":{\"widget-overflow-fixed-list\":[],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"home-button\",\"customizableui-special-spring1\",\"urlbar-container\",\"customizableui-special-spring4\",\"developer-button\",\"add-ons-button\",\"downloads-button\",\"library-button\",\"sidebar-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"personal-bookmarks\"]},\"seen\":[\"developer-button\"],\"dirtyAreaCache\":[\"nav-bar\",\"toolbar-menubar\",\"TabsToolbar\",\"PersonalToolbar\"],\"currentVersion\":16,\"newElementCount\":4}";
         # why?
         #   "pref.privacy.disable_button.cookie_exceptions" = false;
-        # do want?
-        #   "privacy.donottrackheader.enabled" = true;
       };
     };
   };

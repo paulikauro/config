@@ -35,6 +35,12 @@
           allowOther = true;
           directories = [ "stash" ];
         };
+        "/local/myhome" = {
+          allowOther = true;
+          directories = [
+            ".config/discord"
+          ];
+        };
       };
     };
 }

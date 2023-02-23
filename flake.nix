@@ -18,7 +18,7 @@
   };
   outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, stylix, base16-schemes, arkenfox-nixos }@args:
     let
-      theUsername = "testuser";
+      theUsername = "pauli";
       dataModules = import ./data.nix;
     in
     {
@@ -82,6 +82,8 @@
                   cmake
                   libglvnd
                   glxinfo
+                  lz4
+                  dejsonlz4
                   jq
                   nix-index
                   emacs

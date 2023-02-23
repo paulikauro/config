@@ -97,9 +97,18 @@ mount -o subvol=persist,noatime /dev/mapper/notroot /mnt/persist
 mount -o subvol=local,noatime /dev/mapper/notroot /mnt/local
 ```
 
-## Generate hardware config
+## Config
 ```sh
 nixos-generate-config --root /mnt
+# edit stuff
+
+# hash password
+sh bin/mypasswd.sh | tee /mnt/local/password
+```
+
+## Install
+```sh
+nixos-install --root /mnt --flake /etc/nixos#thonkpad --cores 0 --no-root-password
 ```
 
 # logseq
