@@ -1,5 +1,5 @@
 # TODO: remove hardcoded things like hostname, username, ...
-{ config, pkgs, theUsername, ... }:
+{ config, pkgs, lib, theUsername, ... }:
 {
   # TODO: packages-module?
   imports = [
@@ -7,8 +7,8 @@
   ];
   boot = {
     loader = {
-      # TODO: ???
-      systemd-boot.enable = true;
+      # lanzaboote replaces systemd-boot
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
       # press Esc during boot to display menu
       # annoying, because firmware also does stuff when you press Esc,
@@ -40,6 +40,11 @@
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" "btrfs" ];
     tmpOnTmpfs = true;
+    bootspec.enable = true;
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
   };
 
   hardware.amdgpu = {

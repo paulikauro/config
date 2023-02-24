@@ -9,6 +9,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
     base16-schemes = {
         url = "github:tinted-theming/base16-schemes";
@@ -16,7 +20,7 @@
     };
     arkenfox-nixos.url = "github:dwarfmaster/arkenfox-nixos";
   };
-  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, stylix, base16-schemes, arkenfox-nixos }@args:
+  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, lanzaboote, stylix, base16-schemes, arkenfox-nixos }@args:
     let
       theUsername = "pauli";
       dataModules = import ./data.nix;
@@ -28,6 +32,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
+          lanzaboote.nixosModules.lanzaboote
           dataModules.nixosModule
           # NOTE: the thinkpad-e14-amd module, among other things,
           # - sets the kernel parameter iommu=soft (which is unnecessary for me)
@@ -102,6 +107,8 @@
                   killall
                   # helvum
                   sbctl
+                  dmidecode
+                  efibootmgr
                 ];
               };
             };
