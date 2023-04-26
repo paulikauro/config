@@ -96,7 +96,6 @@
                   dataModules.hmModule
                   arkenfox-nixos.hmModules.arkenfox
                   (_: { stylix.targets.vscode.enable = false; })
-                  ./kak-stylix.nix
                 ];
                 # TODO: cleanup
                 home.stateVersion = "23.05";

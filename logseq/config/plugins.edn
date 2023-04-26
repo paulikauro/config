@@ -1,4 +1,0 @@
-{:logseq-journals-calendar {:version "v0.10.8", :repo "xyhp915/logseq-journals-calendar", :effect false, :theme false}
- :logseq-tabs {:version "v1.18.1", :repo "pengx17/logseq-plugin-tabs", :effect true, :theme false}
- :logseq-bullet-threading {:version "v1.1.1", :repo "pengx17/logseq-plugin-bullet-threading", :effect false, :theme false}
- :logseq-vim-shortcuts {:version "v0.1.17", :repo "vipzhicheng/logseq-plugin-vim-shortcuts", :effect true, :theme false}}

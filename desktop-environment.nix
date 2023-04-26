@@ -6,7 +6,7 @@ with pkgs.lib.attrsets;
   # - emacs service & client.. dev config? git, jetbrains tools
   # - dunst, polybar config, redshift config?
   # - ssh
-  imports = [ ./development.nix ./logseq ./firefox ];
+  imports = [ ./development.nix ./firefox ];
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     # (nerdfonts.override { fonts = ["JetBrainsMono"]; })
