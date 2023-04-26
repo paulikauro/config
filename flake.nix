@@ -9,10 +9,17 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
+    # TODO remove when lanzaboote updates
+    rust-overlay.url = "github:oxalica/rust-overlay";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
+    # 100% cpu
+    #nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    nil.url = "github:oxalica/nil";
     stylix.url = "github:danth/stylix";
     base16-schemes = {
         url = "github:tinted-theming/base16-schemes";
@@ -20,7 +27,7 @@
     };
     arkenfox-nixos.url = "github:dwarfmaster/arkenfox-nixos";
   };
-  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, lanzaboote, stylix, base16-schemes, arkenfox-nixos }@args:
+  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, rust-overlay, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos }@args:
     let
       theUsername = "pauli";
       dataModules = import ./data.nix;
@@ -45,14 +52,30 @@
             nix = {
               registry.nixpkgs.flake = nixpkgs;
               package = pkgs.nixUnstable;
-              # TODO protect nix-shell against GC? see nix-direnv readme
-              extraOptions = "experimental-features = nix-command flakes";
-              settings.extra-sandbox-paths = [ "/bin/sh" ];
+              settings = {
+                experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+                keep-outputs = true;
+                keep-derivations = true;
+                substituters = [
+                  "https://cache.nixos.org"
+                  "https://nix-community.cachix.org"
+                  # haskell.nix stuff is cached here
+                  "https://cache.iog.io"
+                ];
+                trusted-public-keys = [
+                  "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+                  # haskell.nix
+                  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+                ];
+                extra-sandbox-paths = [ "/bin/sh" ];
+              };
             };
             system.configurationRevision = self.rev or "dirty-git-tree";
             nixpkgs = {
               overlays = [
                 nur.overlay
+                nil.overlays.nil
+                emacs-overlay.overlays.emacs
                 #(import ./discord-fix.nix)
               ];
               config.allowUnfree = true;
@@ -70,7 +93,7 @@
                 imports = [
                   ./desktop-environment.nix
                   impermanence.nixosModules.home-manager.impermanence
-                  dataModules.homeModule
+                  dataModules.hmModule
                   arkenfox-nixos.hmModules.arkenfox
                   (_: { stylix.targets.vscode.enable = false; })
                   ./kak-stylix.nix
@@ -91,10 +114,9 @@
                   dejsonlz4
                   jq
                   nix-index
-                  emacs
                   prismlauncher
                   cryptsetup
-                  # openjdk
+                  openjdk11
                   python3
                   patchelf
                   gnumake
@@ -106,9 +128,12 @@
                   lshw
                   killall
                   # helvum
+                  # guitarix
                   sbctl
                   dmidecode
                   efibootmgr
+                  tpm2-tools
+                  unar
                 ];
               };
             };

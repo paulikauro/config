@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
-  editor = "kak";
-  tomlFormat = pkgs.formats.toml {};
+  editor = "emacsclient -c";
 in
 {
   imports = [
@@ -13,7 +12,7 @@ in
     clojure
     clojure-lsp
     nil
-    haskell-language-server
+    # haskell-language-server
     ghc
     maven
     zip
@@ -31,14 +30,27 @@ in
     openssl
     sqlite
     coq
-    nodePackages.purescript-language-server
-    nodePackages.purs-tidy
     purescript
     spago
     dhall
     dhall-lsp-server
+    fzf
     # agda
-  ];
+    # emacs dependencies
+    fd
+    ripgrep
+    # the default tree-sitter plugins are fine
+    emacsGit
+    emacs-all-the-icons-fonts
+  ] ++ (with nodePackages; [
+    purescript-language-server
+    purs-tidy
+    vscode-langservers-extracted
+    typescript-language-server
+    typescript
+    yarn
+  ]);
+  home.sessionPath = [ "$HOME/.config/emacs/bin" ];
   home.shellAliases = {
     upnix = "sudo nixos-rebuild switch -v --flake /etc/nixos";
     ednix = "( cd /etc/nixos && ${editor} )";
@@ -55,6 +67,10 @@ in
     nnoremap , <Cmd>call VSCodeNotify('vspacecode.space')<CR><Cmd>call VSCodeNotify('whichkey.triggerKey', 'm')<CR>
     vnoremap , <Cmd>call VSCodeNotify('vspacecode.space')<CR><Cmd>call VSCodeNotify('whichkey.triggerKey', 'm')<CR>
   '';
+  services.emacs = {
+    enable = false; # todo
+    startWithUserSession = true;
+  };
   programs = {
     git = {
       enable = true;

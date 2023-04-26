@@ -1,6 +1,5 @@
 { config, pkgs, config-dir, ... }:
 {
-  home.file.".mozilla/firefox/default/containers.json".source = config.lib.file.mkOutOfStoreSymlink "${config-dir}/firefox/containers.json";
   programs.firefox = {
     # TODO: dark theme, vimperator/vimium/tridactyl/???, userChrome
     enable = true;
@@ -109,14 +108,26 @@
             {
               Name = "Nix Options";
               URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
-              "Method" = "GET";
-              "Alias" = "no";
+              Method = "GET";
+              Alias = "no";
             }
             {
               Name = "Nix Packages";
               URLTemplate = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
-              "Method" = "GET";
-              "Alias" = "np";
+              Method = "GET";
+              Alias = "np";
+            }
+            {
+              Name = "Pursuit";
+              URLTemplate = "https://pursuit.purescript.org/search?q={searchTerms}";
+              Method = "GET";
+              Alias = "ps";
+            }
+            {
+              Name = "Hoogle";
+              URLTemplate = "https://hoogle.haskell.org/?hoogle={searchTerms}";
+              Method = "GET";
+              Alias = "hs";
             }
           ];
           Default = "DuckDuckGo";
@@ -208,6 +219,8 @@
         "browser.urlbar.suggest.history" = false;
         "browser.urlbar.suggest.openpage" = false;
         "browser.urlbar.suggest.topsites" = false;
+        # enable font bounding box text metrics
+        "dom.textMetrics.fontBoundingBox.enabled" = true;
         #   "browser.bookmarks.defaultLocation" = "unfiled";
         #   "browser.download.panel.shown" = true;
         # ugh

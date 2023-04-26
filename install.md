@@ -90,11 +90,13 @@ cd /mnt/notroot
 btrfs subvolume create nix
 btrfs subvolume create persist
 btrfs subvolume create local
+btrfs subvolume create tmp
 cd /mnt
 sudo umount notroot
 mount -o subvol=nix,noatime /dev/mapper/notroot /mnt/nix
 mount -o subvol=persist,noatime /dev/mapper/notroot /mnt/persist
 mount -o subvol=local,noatime /dev/mapper/notroot /mnt/local
+mount -o subvol=tmp,noatime /dev/mapper/notroot /mnt/tmp
 ```
 
 ## Config

@@ -5,6 +5,15 @@
   imports = [
     ./thonkpad-hardware.nix
   ];
+  # TODO this should be somewhere audio related
+  security.pam.loginLimits = [
+    { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+    { domain = "@audio"; item = "rtprio"; type = "-"; value = "95"; }
+    { domain = "@audio"; item = "nice"; type = "-"; value = "-19"; }
+  ];
+  #services.openvpn.servers = {
+  #  testi.config = '' config /local/vpn.conf '';
+  #};
   boot = {
     loader = {
       # lanzaboote replaces systemd-boot
@@ -39,7 +48,6 @@
     # TODO: something
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" "btrfs" ];
-    tmpOnTmpfs = true;
     bootspec.enable = true;
     lanzaboote = {
       enable = true;
@@ -93,6 +101,18 @@
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+
+  #services.pipewire = {
+  #  enable = true;
+  #  alsa = {
+  #    enable = true;
+  #    support32Bit = true;
+  #  };
+  #  jack.enable = true;
+  #  pulse.enable = true;
+  #  socketActivation = true;
+  #};
+
   hardware.opengl.enable = true;
 
   hardware.openrazer = {
@@ -109,17 +129,6 @@
     Defaults lecture = never
     '';
   };
-
-  #services.pipewire = {
-  #  enable = true;
-  #  alsa = {
-  #    enable = true;
-  #    support32Bit = true;
-  #  };
-  #  jack.enable = true;
-  #  pulse.enable = true;
-  #  socketActivation = true;
-  #};
 
   # todo: configure this
   services.input-remapper.enable = true;
@@ -153,7 +162,7 @@
   users.mutableUsers = false;
   users.users.${theUsername} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "network-manager" "adbusers" "dialout" ];
+    extraGroups = [ "wheel" "network-manager" "adbusers" "dialout" "audio" ];
     # it's hashed
     passwordFile = "/local/password";
   };

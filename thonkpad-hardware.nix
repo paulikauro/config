@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, theUsername, ... }:
 
 {
   imports =
@@ -60,6 +60,12 @@
     { device = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
       fsType = "btrfs";
       options = [ "noatime" "subvol=log" ];
+    };
+
+    "/tmp" =
+    { device = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
+      fsType = "btrfs";
+      options = [ "noatime" "subvol=tmp" "nosuid" "nodev" "mode=1777" ];
     };
   };
 

@@ -36,9 +36,10 @@ with pkgs.lib.attrsets;
     # soundfont-fluid
     # musescore
     # reaper
-    # ardour
+    ardour
     razergenie
     xorg.xev
+    xcape
     tigervnc
     #rosegarden
     arandr
@@ -47,14 +48,17 @@ with pkgs.lib.attrsets;
     simplescreenrecorder
     steam-run
     age
+    xournalpp
     # zoom-us
     # wine
     # winetricks
     (retroarch.override { cores = with libretro; [ nestopia ]; })
+    protontricks
+    # chromium
   ];
   xdg.configFile."keepassxc/keepassxc.ini".source = config.lib.file.mkOutOfStoreSymlink "${config-dir}/keepassxc.ini";
   home.file.".local/bin".source = ./bin;
-  home.sessionPath = [ "~/.local/bin" ];
+  home.sessionPath = [ "$HOME/.local/bin" ];
   dconf.enable = true;
   services = {
     network-manager-applet.enable = true;
@@ -146,7 +150,7 @@ with pkgs.lib.attrsets;
       {
         startup = [
           {
-            command = "setxkbmap us -variant altgr-intl -option caps:escape";
+            command = "~/.local/bin/caps.sh";
             always = true;
             notification = false;
             workspace = null;
