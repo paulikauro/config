@@ -53,6 +53,8 @@ Might also want to fill the drive with random data and disable TRIM.
 I didn't. This makes it possible to see certain things (like filesystem type) without the encryption key.
 
 ## USB boot stick
+(I switched to having the ESP on an internal SSD because the USB drive was pretty slow.
+I still have the LUKS header on the USB drive.)
 ```sh
 # $usb = usb stick (/dev/sdb)
 fdisk $usb
@@ -112,8 +114,4 @@ sh bin/mypasswd.sh | tee /mnt/local/password
 ```sh
 nixos-install --root /mnt --flake /etc/nixos#thonkpad --cores 0 --no-root-password
 ```
-
-# logseq
-- Ctrl+Shift+P and "Install from plugins.edn" to finish installation
-- [ ] TODO: nix it?
 

@@ -55,6 +55,38 @@ with pkgs.lib.attrsets;
     (retroarch.override { cores = with libretro; [ nestopia ]; })
     protontricks
     # chromium
+
+    openssl
+    openssl.dev
+    nvme-cli
+    kopia
+    cmake
+    libglvnd
+    glxinfo
+    lz4
+    dejsonlz4
+    jq
+    nix-index
+    prismlauncher
+    cryptsetup
+    openjdk11
+    python3
+    patchelf
+    gnumake
+    gcc
+    glibc
+    usbutils
+    pciutils
+    file
+    lshw
+    killall
+    # helvum
+    # guitarix
+    sbctl
+    dmidecode
+    efibootmgr
+    tpm2-tools
+    unar
   ];
   xdg.configFile."keepassxc/keepassxc.ini".source = config.lib.file.mkOutOfStoreSymlink "${config-dir}/keepassxc.ini";
   home.file.".local/bin".source = ./bin;

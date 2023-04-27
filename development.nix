@@ -3,9 +3,7 @@ let
   editor = "emacsclient -c";
 in
 {
-  imports = [
-    ./kakoune.nix
-  ];
+  imports = [ ];
   # TODO bind neovim path?
   home.packages = with pkgs; [
     ghostscript
@@ -50,7 +48,7 @@ in
     typescript
     yarn
   ]);
-  home.sessionPath = [ "$HOME/.config/emacs/bin" ];
+  # home.sessionPath = [ "$HOME/.config/emacs/bin" ];
   home.shellAliases = {
     upnix = "sudo nixos-rebuild switch -v --flake /etc/nixos";
     ednix = "( cd /etc/nixos && ${editor} )";

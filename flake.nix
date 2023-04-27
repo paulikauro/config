@@ -33,112 +33,90 @@
       dataModules = import ./data.nix;
     in
     {
-      nixosConfigurations.thonkpad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit theUsername; } // args;
-        modules = [
-          home-manager.nixosModules.home-manager
-          impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
-          dataModules.nixosModule
-          # NOTE: the thinkpad-e14-amd module, among other things,
-          # - sets the kernel parameter iommu=soft (which is unnecessary for me)
-          # - enables the fstrim service (which might be bad for disk encryption?)
-          nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
-          ./thonkpad.nix
-          stylix.nixosModules.stylix
-          ./styling.nix
-          ({ pkgs, ... }: {
-            nix = {
-              registry.nixpkgs.flake = nixpkgs;
-              package = pkgs.nixUnstable;
-              settings = {
-                experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-                keep-outputs = true;
-                keep-derivations = true;
-                substituters = [
-                  "https://cache.nixos.org"
-                  "https://nix-community.cachix.org"
-                  # haskell.nix stuff is cached here
-                  "https://cache.iog.io"
-                ];
-                trusted-public-keys = [
-                  "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                  # haskell.nix
-                  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-                ];
-                extra-sandbox-paths = [ "/bin/sh" ];
+      nixosConfigurations = {
+        deckstop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit theUsername; } // args;
+          modules = [
+            home-manager.nixosModules.home-manager
+            impermanence.nixosModules.impermanence
+            # lanzaboote.nixosModules.lanzaboote
+            # dataModules.nixosModule
+            nixos-hardware.nixosModules.common-cpu-intel
+            nixos-hardware.nixosModules.common-gpu-amd
+            # this enables fstrim, see thonkpad config
+            nixos-hardware.nixosModules.common-pc-ssd
+            ./deckstop.nix
+            stylix.nixosModules.stylix
+            ./styling.nix
+            ./nix-config.nix
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  config-dir = "/etc/nixos";
+                  inherit theUsername;
+                } // args;
+                users.${theUsername} = { pkgs, ... }: {
+                  imports = [
+                    ./desktop-environment.nix
+                    impermanence.nixosModules.home-manager.impermanence
+                    # dataModules.hmModule
+                    arkenfox-nixos.hmModules.arkenfox
+                    (_: { stylix.targets.vscode.enable = false; })
+                  ];
+                  # TODO: cleanup
+                  home.stateVersion = "23.05";
+                  home.homeDirectory = "/home/${theUsername}";
+                  # home.username = theUsername; # not needed?
+                };
               };
-            };
-            system.configurationRevision = self.rev or "dirty-git-tree";
-            nixpkgs = {
-              overlays = [
-                nur.overlay
-                nil.overlays.nil
-                emacs-overlay.overlays.emacs
-                #(import ./discord-fix.nix)
-              ];
-              config.allowUnfree = true;
-            };
-          })
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                config-dir = "/etc/nixos";
-                inherit theUsername;
-              } // args;
-              users.${theUsername} = { pkgs, ... }: {
-                imports = [
-                  ./desktop-environment.nix
-                  impermanence.nixosModules.home-manager.impermanence
-                  dataModules.hmModule
-                  arkenfox-nixos.hmModules.arkenfox
-                  (_: { stylix.targets.vscode.enable = false; })
-                ];
-                # TODO: cleanup
-                home.stateVersion = "23.05";
-                home.homeDirectory = "/home/${theUsername}";
-                # home.username = theUsername; # not needed?
-                home.packages = with pkgs; [
-                  openssl
-                  openssl.dev
-                  nvme-cli
-                  kopia
-                  cmake
-                  libglvnd
-                  glxinfo
-                  lz4
-                  dejsonlz4
-                  jq
-                  nix-index
-                  prismlauncher
-                  cryptsetup
-                  openjdk11
-                  python3
-                  patchelf
-                  gnumake
-                  gcc
-                  glibc
-                  usbutils
-                  pciutils
-                  file
-                  lshw
-                  killall
-                  # helvum
-                  # guitarix
-                  sbctl
-                  dmidecode
-                  efibootmgr
-                  tpm2-tools
-                  unar
-                ];
+            }
+          ];
+        };
+        thonkpad = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit theUsername; } // args;
+          modules = [
+            home-manager.nixosModules.home-manager
+            impermanence.nixosModules.impermanence
+            lanzaboote.nixosModules.lanzaboote
+            dataModules.nixosModule
+            # NOTE: the thinkpad-e14-amd module, among other things,
+            # - sets the kernel parameter iommu=soft (which is unnecessary for me)
+            # - enables the fstrim service (which might be bad for disk encryption?)
+            nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
+            ./thonkpad.nix
+            stylix.nixosModules.stylix
+            ./styling.nix
+            ./nix-config.nix
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  config-dir = "/etc/nixos";
+                  inherit theUsername;
+                } // args;
+                users.${theUsername} = { pkgs, ... }: {
+                  imports = [
+                    ./desktop-environment.nix
+                    impermanence.nixosModules.home-manager.impermanence
+                    dataModules.hmModule
+                    arkenfox-nixos.hmModules.arkenfox
+                    (_: { stylix.targets.vscode.enable = false; })
+                  ];
+                  # TODO: cleanup
+                  home.stateVersion = "23.05";
+                  home.homeDirectory = "/home/${theUsername}";
+                  # home.username = theUsername; # not needed?
+                };
               };
-            };
-          }
-        ];
+            }
+          ];
       };
     };
+  };
 }
 
