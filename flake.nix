@@ -34,19 +34,22 @@
     in
     {
       nixosConfigurations = {
-        deckstop = nixpkgs.lib.nixosSystem {
+        tritonus = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit theUsername; } // args;
+          specialArgs = {
+            inherit theUsername;
+            notrootDisk = "/dev/disk/by-uuid/49633c2c-82ca-4fa9-82a1-1b7d68f50ca5";
+          } // args;
           modules = [
             home-manager.nixosModules.home-manager
             impermanence.nixosModules.impermanence
-            # lanzaboote.nixosModules.lanzaboote
-            # dataModules.nixosModule
+            lanzaboote.nixosModules.lanzaboote
+            dataModules.nixosModule
             nixos-hardware.nixosModules.common-cpu-intel
             nixos-hardware.nixosModules.common-gpu-amd
             # this enables fstrim, see thonkpad config
             nixos-hardware.nixosModules.common-pc-ssd
-            ./deckstop.nix
+            ./tritonus.nix
             stylix.nixosModules.stylix
             ./styling.nix
             ./nix-config.nix
@@ -62,7 +65,7 @@
                   imports = [
                     ./desktop-environment.nix
                     impermanence.nixosModules.home-manager.impermanence
-                    # dataModules.hmModule
+                    dataModules.hmModule
                     arkenfox-nixos.hmModules.arkenfox
                     (_: { stylix.targets.vscode.enable = false; })
                   ];
@@ -77,7 +80,10 @@
         };
         thonkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit theUsername; } // args;
+          specialArgs = {
+            inherit theUsername;
+            notrootDisk = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
+          } // args;
           modules = [
             home-manager.nixosModules.home-manager
             impermanence.nixosModules.impermanence

@@ -1,8 +1,15 @@
 {
   # /persist: persistent and backed up
   # /local: persistent but not backed up
-  nixosModule = { theUsername, ... }:
+  nixosModule = { theUsername, notrootDisk, ... }:
   {
+    services.syncthing = {
+      enable = true;
+      user = theUsername;
+      dataDir = "/persist";
+      # does not need to be mounted
+      configDir = "/local/myhome/.config/syncthing";
+    };
     environment.persistence = {
       "/persist" = {
         hideMounts = true;
@@ -32,7 +39,7 @@
     # these two are mounted after home-manager so that ~/.local isn't owned by root...
     systemd.mounts = [
       {
-        what = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
+        what = notrootDisk;
         where = "/home/${theUsername}/.steam";
         unitConfig.DefaultDependencies = "no";
         type = "btrfs";
@@ -42,7 +49,7 @@
         wantedBy = [ "graphical.target" ];
       }
       {
-        what = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
+        what = notrootDisk;
         where = "/home/${theUsername}/.local/share/Steam";
         unitConfig.DefaultDependencies = "no";
         type = "btrfs";

@@ -54,7 +54,7 @@ with pkgs.lib.attrsets;
     # winetricks
     (retroarch.override { cores = with libretro; [ nestopia ]; })
     protontricks
-    # chromium
+    chromium
 
     openssl
     openssl.dev
