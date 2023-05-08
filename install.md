@@ -135,9 +135,13 @@ mkfs.fat -F 32 $boot
 # follow rest too
 ```
 
-## Generate machine-id
+## Persistence
 ```sh
+# generate machine-id
 dbus-uuidgen --ensure=/mnt/local/etc/machine-id
+# create and chown home dir things
+mkdir /persist/myhome /local/myhome
+chown -R pauli:users /persist/myhome /local/myhome
 ```
 
 ## Tricky bit
@@ -148,4 +152,13 @@ Disable lanzaboote and enable systemd-boot, then install, then reverse changes a
 sbctl create-keys
 mkdir /mnt/local/etc
 mv /etc/secureboot /mnt/local/etc/
+# for firmware, it wants der
+openssl x509 -in db.pem -outform der -out db.der
 ```
+
+# TPM2 LUKS keyslot
+Use `--tpm2-with-pin` for laptop.
+```sh
+systemd-cryptenroll --tpm2-pcrs=7 --tpm2-device=auto $notroot
+```
+

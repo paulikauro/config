@@ -3,6 +3,13 @@
   # /local: persistent but not backed up
   nixosModule = { theUsername, notrootDisk, ... }:
   {
+    services.syncthing = {
+      enable = true;
+      user = theUsername;
+      dataDir = "/persist";
+      # does not need to be mounted
+      configDir = "/local/myhome/.config/syncthing";
+    };
     environment.persistence = {
       "/persist" = {
         hideMounts = true;
