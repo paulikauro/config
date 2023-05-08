@@ -6,9 +6,26 @@
     services.syncthing = {
       enable = true;
       user = theUsername;
-      dataDir = "/persist";
+      # data dir is redundant, but whatever
+      dataDir = "/homeless-shelter";
       # does not need to be mounted
       configDir = "/local/myhome/.config/syncthing";
+      overrideDevices = true;
+      overrideFolders = true;
+      devices = {
+        thonkpad.id = "O2T4MYU-HLHROBL-7AMG7ND-GCIG36U-UEEXTJL-E5XQ45H-S3XXDQW-ZHVURQL";
+        tritonus.id = "QPXZZ5I-5SWA5NK-5SYUCGW-UZGZM73-O4WUYPH-MDRDYKB-HFFDHIT-FM5LCA2";
+      };
+      folders = {
+        "/persist/myhome/stash" = {
+          id = "stash";
+          label = "stash";
+          devices = [ "thonkpad" "tritonus" ];
+        };
+      };
+      # it's the default, but in case it ever changes
+      guiAddress = "127.0.0.1:8384";
+      openDefaultPorts = true;
     };
     environment.persistence = {
       "/persist" = {
