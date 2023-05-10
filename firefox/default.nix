@@ -208,7 +208,7 @@
       };
       settings = {
         # disable annoying "It looks like you haven't started Firefox in a while" popup
-        "browser.disableResetPrompt" = false;
+        "browser.disableResetPrompt" = true;
         # TODO replace with clearOnShutdown after upgrading to firefox 103+
         "network.cookie.lifetimePolicy" = 2;
         # disable "Add application for mailto" -bar
