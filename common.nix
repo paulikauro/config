@@ -51,6 +51,7 @@
       enable = true;
       dockerCompat = true;
     };
+    libvirtd.enable = true;
   };
 
   networking.networkmanager.enable = true;
@@ -137,7 +138,7 @@
   users.mutableUsers = false;
   users.users.${theUsername} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "network-manager" "adbusers" "dialout" "audio" ];
+    extraGroups = [ "wheel" "network-manager" "adbusers" "dialout" "audio" "libvirtd" ];
     # it's hashed
     passwordFile = "/local/password";
   };

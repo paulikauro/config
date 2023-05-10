@@ -9,6 +9,7 @@ with pkgs.lib.attrsets;
   imports = [ ./development.nix ./firefox ];
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    virt-manager
     # (nerdfonts.override { fonts = ["JetBrainsMono"]; })
     # jetbrains-mono
     xfce.xfce4-terminal
