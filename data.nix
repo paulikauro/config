@@ -7,6 +7,7 @@
     services.syncthing = {
       enable = true;
       user = theUsername;
+      group = "users";
       # data dir is redundant, but whatever
       dataDir = "/homeless-shelter";
       # does not need to be mounted
