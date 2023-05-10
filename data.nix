@@ -1,6 +1,7 @@
 {
-  # /persist: persistent and backed up
-  # /local: persistent but not backed up
+  # TODO is there a need for only synced or only backed up? (persistent of course)
+  # /persist: persistent, backed up, synced
+  # /local: persistent, not backed up, not synced
   nixosModule = { theUsername, notrootDisk, ... }:
   {
     services.syncthing = {
@@ -31,7 +32,6 @@
       "/persist" = {
         hideMounts = true;
         directories = [
-          "/etc/NetworkManager/system-connections"
           {
             directory = "/etc/nixos";
             user = theUsername;
@@ -43,6 +43,7 @@
       "/local" = {
         hideMounts = true;
         directories = [
+          "/etc/NetworkManager/system-connections"
           "/etc/secureboot"
           "/etc/cert"
         ];
@@ -82,7 +83,12 @@
     home.persistence = {
       "/persist/myhome" = {
         allowOther = true;
-        directories = [ "stash" ".config/emacs" ".config/ardour7" ];
+        directories = [
+          "stash"
+          ".config/emacs"
+          ".config/ardour7"
+          ".local/share/PrismLauncher"
+        ];
       };
       "/local/myhome" = {
         allowOther = true;
@@ -92,7 +98,6 @@
           ".config/kopia"
           ".config/pulse"
           ".ssh"
-          ".local/share/PrismLauncher"
           ".local/share/direnv"
           ".mozilla/firefox"
         ];
