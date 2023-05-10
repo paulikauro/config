@@ -18,10 +18,12 @@
         tritonus.id = "QPXZZ5I-5SWA5NK-5SYUCGW-UZGZM73-O4WUYPH-MDRDYKB-HFFDHIT-FM5LCA2";
       };
       folders = {
-        "/persist/myhome/stash" = {
-          id = "stash";
-          label = "stash";
+        "/persist" = {
+          id = "persist";
+          label = "persist";
           devices = [ "thonkpad" "tritonus" ];
+          # sync permissions too!
+          ignorePerms = false;
         };
       };
       # it's the default, but in case it ever changes
