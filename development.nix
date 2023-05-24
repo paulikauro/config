@@ -6,6 +6,8 @@ in
   imports = [ ];
   # TODO bind neovim path?
   home.packages = with pkgs; [
+    podman-compose
+    jujutsu
     ghostscript
     clojure
     clojure-lsp
@@ -70,6 +72,9 @@ in
     startWithUserSession = true;
   };
   programs = {
+    fish = {
+      enable = true;
+    };
     git = {
       enable = true;
       userName = "Pauli Kauro";

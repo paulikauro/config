@@ -97,11 +97,13 @@
         allowOther = true;
         directories = [
           ".cabal"
+          ".cache"
           ".config/discord"
           ".config/kopia"
           ".config/pulse"
           ".ssh"
           ".local/share/direnv"
+          ".local/share/containers"
           ".mozilla/firefox"
         ];
       };
