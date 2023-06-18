@@ -162,3 +162,9 @@ Use `--tpm2-with-pin` for laptop.
 systemd-cryptenroll --tpm2-pcrs=7 --tpm2-device=auto $notroot
 ```
 
+# Swapfile
+```sh
+cd /local
+btrfs filesystem mkswapfile --size 32G swap
+```
+
