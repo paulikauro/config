@@ -71,7 +71,7 @@
   programs.steam.enable = true;
 
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.enable = true;
 
   security.pam.loginLimits = [
     { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
@@ -79,16 +79,16 @@
     { domain = "@audio"; item = "nice"; type = "-"; value = "-19"; }
   ];
 
-  #services.pipewire = {
-  #  enable = true;
-  #  alsa = {
-  #    enable = true;
-  #    support32Bit = true;
-  #  };
-  #  jack.enable = true;
-  #  pulse.enable = true;
-  #  socketActivation = true;
-  #};
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    jack.enable = true;
+    pulse.enable = true;
+    socketActivation = true;
+  };
 
   hardware.opengl.enable = true;
 

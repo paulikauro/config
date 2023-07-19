@@ -9,6 +9,7 @@ with pkgs.lib.attrsets;
   imports = [ ./development.nix ./firefox ];
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    qpwgraph
     # chromium
     virt-manager
     # (nerdfonts.override { fonts = ["JetBrainsMono"]; })

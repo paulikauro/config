@@ -20,10 +20,6 @@
     loadInInitrd = true;
   };
 
-  hardware.pulseaudio.daemon.config = {
-    default-sample-rate = "48000";
-  };
-
   system.stateVersion = "23.05"; # Did you read the comment? nah.
 }
 
