@@ -14,17 +14,19 @@
       configDir = "/local/myhome/.config/syncthing";
       overrideDevices = true;
       overrideFolders = true;
-      devices = {
-        thonkpad.id = "O2T4MYU-HLHROBL-7AMG7ND-GCIG36U-UEEXTJL-E5XQ45H-S3XXDQW-ZHVURQL";
-        tritonus.id = "QPXZZ5I-5SWA5NK-5SYUCGW-UZGZM73-O4WUYPH-MDRDYKB-HFFDHIT-FM5LCA2";
-      };
-      folders = {
-        "/persist" = {
-          id = "persist";
-          label = "persist";
-          devices = [ "thonkpad" "tritonus" ];
-          # sync permissions too!
-          ignorePerms = false;
+      settings = {
+        devices = {
+          thonkpad.id = "O2T4MYU-HLHROBL-7AMG7ND-GCIG36U-UEEXTJL-E5XQ45H-S3XXDQW-ZHVURQL";
+          tritonus.id = "QPXZZ5I-5SWA5NK-5SYUCGW-UZGZM73-O4WUYPH-MDRDYKB-HFFDHIT-FM5LCA2";
+        };
+        folders = {
+          "/persist" = {
+            id = "persist";
+            label = "persist";
+            devices = [ "thonkpad" "tritonus" ];
+            # sync permissions too!
+            ignorePerms = false;
+          };
         };
       };
       # it's the default, but in case it ever changes
@@ -104,6 +106,9 @@
           ".ssh"
           ".local/share/direnv"
           ".local/share/containers"
+          ".local/share/TelegramDesktop"
+          ".local/share/emacs"
+          ".local/share/bottles"
           ".mozilla/firefox"
         ];
       };

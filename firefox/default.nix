@@ -3,7 +3,7 @@
   programs.firefox = {
     # TODO: dark theme, vimperator/vimium/tridactyl/???, userChrome
     enable = true;
-    package = pkgs.firefox-esr-102.override {
+    package = pkgs.firefox-esr-115.override {
       extraPolicies = {
         # 3rdparty
         # AutoLaunchProtocolsFromOrigins
@@ -22,6 +22,7 @@
         DisablePocket = true;
         DisablePrivateBrowsing = true;
         DisableSetDesktopBackground = true;
+
         # This should also prevent system add-ons from being installed in the first place
         DisableSystemAddonUpdate = true;
         DisableTelemetry = true;
@@ -79,7 +80,7 @@
           in
           {
             Camera = NOPE;
-            Microphone = NOPE;
+            #Microphone = NOPE;
             Location = NOPE;
             # Notifications = NOPE;
             Autoplay = {
@@ -129,6 +130,12 @@
               Method = "GET";
               Alias = "hs";
             }
+            {
+              Name = "Home-manager Options";
+              URLTemplate = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}";
+              Method = "GET";
+              Alias = "ho";
+            }
           ];
           Default = "DuckDuckGo";
           PreventInstalls = true;
@@ -155,7 +162,7 @@
     };
     arkenfox = {
       enable = true;
-      version = "102.0";
+      version = "115.1";
     };
     profiles.default = {
       id = 0;
@@ -163,7 +170,6 @@
       isDefault = true;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
-        keepassxc-browser
         multi-account-containers
       ];
       arkenfox = {
@@ -179,7 +185,6 @@
         "0600".enable = true;
         "0700" = {
           enable = true;
-          "0701"."network.dns.disableIPv6".value = false;
         };
         "0800" = {
           enable = true;
@@ -200,7 +205,8 @@
         "2800" = {
           enable = true;
           # TODO when updating to firefox 103+, re-enable and get rid of network.cookie.lifetimePolicy = 2
-          "2811"."privacy.clearOnShutdown.cookies".value = false;
+          # re-enabled (it's true now)
+          # "2811"."privacy.clearOnShutdown.cookies".value = false;
         };
         "4500".enable = true;
         "6000".enable = true;
@@ -210,7 +216,8 @@
         # disable annoying "It looks like you haven't started Firefox in a while" popup
         "browser.disableResetPrompt" = true;
         # TODO replace with clearOnShutdown after upgrading to firefox 103+
-        "network.cookie.lifetimePolicy" = 2;
+        # replaced
+        # "network.cookie.lifetimePolicy" = 2;
         # disable "Add application for mailto" -bar
         "network.protocol-handler.external.mailto" = false;
         # disable websites from messing with keybindings (GitHub likes to grab Ctrl+K to itself, which I use to search)

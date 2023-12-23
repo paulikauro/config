@@ -6,7 +6,7 @@
     ./common.nix
   ];
   services.openssh = {
-    enable = true;
+    enable = false;
   };
   #services.openvpn.servers = {
   #  testi.config = '' config /local/vpn.conf '';

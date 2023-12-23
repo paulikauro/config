@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   editor = "emacsclient -c";
 in
@@ -6,6 +6,9 @@ in
   imports = [ ];
   # TODO bind neovim path?
   home.packages = with pkgs; [
+    racket
+    jdk11
+    jetbrains.idea-ultimate
     podman-compose
     jujutsu
     ghostscript
@@ -31,16 +34,16 @@ in
     sqlite
     coq
     purescript
-    spago
+    # BROKEN spago
     dhall
-    dhall-lsp-server
+    # BROKEN dhall-lsp-server
     fzf
     # agda
     # emacs dependencies
     fd
     ripgrep
     # the default tree-sitter plugins are fine
-    emacsGit
+    emacs29
     emacs-all-the-icons-fonts
   ] ++ (with nodePackages; [
     purescript-language-server
@@ -50,7 +53,7 @@ in
     typescript
     yarn
   ]);
-  # home.sessionPath = [ "$HOME/.config/emacs/bin" ];
+  home.sessionPath = [ "$HOME/.config/emacs/bin" ];
   home.shellAliases = {
     upnix = "sudo nixos-rebuild switch -v --flake /etc/nixos";
     ednix = "( cd /etc/nixos && ${editor} )";

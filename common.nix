@@ -62,13 +62,25 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-    gtkUsePortal = true;
   };
+  # this can have unforeseen consequences but we're setting it anyway!!!
+  environment.sessionVariables.GTK_USE_PORTAL = "1";
 
   hardware.enableRedistributableFirmware = true;
 
   programs.adb.enable = true;
   programs.steam.enable = true;
+
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main = {
+        capslock = "overload(control, esc)";
+        esc = "capslock";
+      };
+    };
+  };
 
   sound.enable = true;
   # hardware.pulseaudio.enable = true;
@@ -106,6 +118,10 @@
     '';
   };
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
   # todo: configure this
   services.input-remapper.enable = true;
 
@@ -118,7 +134,7 @@
     exportConfiguration = true;
     layout = "us";
     xkbVariant = "altgr-intl";
-    xkbOptions = "caps:escape";
+    #xkbOptions = "caps:escape";
 
     libinput = {
       enable = true;
@@ -140,7 +156,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "network-manager" "adbusers" "dialout" "audio" "libvirtd" ];
     # it's hashed
-    passwordFile = "/local/password";
+    hashedPasswordFile = "/local/password";
   };
   # lock root password
   users.users.root.hashedPassword = "!";
