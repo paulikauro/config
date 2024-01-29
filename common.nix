@@ -55,6 +55,9 @@
   };
 
   networking.networkmanager.enable = true;
+  # network manager has its own dhcp client
+  # dhcpcd just slows down shutdowns
+  networking.useDHCP = false;
   # TODO: internalisation
   time.timeZone = "Europe/Helsinki";
   # TODO: SUID wrappers? firewall? printing?

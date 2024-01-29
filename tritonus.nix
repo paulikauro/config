@@ -16,7 +16,7 @@
 
   networking = {
     hostName = "tritonus";
-    interfaces.enp6s0.useDHCP = true;
+    interfaces.enp6s0.useDHCP = false;
   };
 
   hardware.amdgpu = {

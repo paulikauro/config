@@ -15,8 +15,8 @@
   networking = {
     hostName = "thonkpad";
     interfaces = {
-      enp2s0.useDHCP = true;
-      wlp3s0.useDHCP = true;
+      enp2s0.useDHCP = false;
+      wlp3s0.useDHCP = false;
     };
   };
 
