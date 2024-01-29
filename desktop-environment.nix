@@ -9,12 +9,12 @@ with pkgs.lib.attrsets;
   imports = [ ./development.nix ./firefox ];
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    xorg.xbacklight
     zoom-us
     telegram-desktop
     x42-plugins
     libreoffice
     qpwgraph
-    chromium
     virt-manager
     # (nerdfonts.override { fonts = ["JetBrainsMono"]; })
     # jetbrains-mono
@@ -98,17 +98,6 @@ with pkgs.lib.attrsets;
     LV2_PATH = "${pkgs.x42-plugins}/lib/lv2";
   };
   xdg.configFile."keepassxc/keepassxc.ini".source = config.lib.file.mkOutOfStoreSymlink "${config-dir}/keepassxc.ini";
-  # I don't want to open anything in chromium unless I explicitly start it myself.
-  # This hack tries to accomplish that
-  xdg.mimeApps = let
-    assocs = config.lib.xdg.mimeAssociations;
-    ff = assocs pkgs.firefox;
-  in {
-    enable = true;
-    associations.removed = assocs pkgs.chromium;
-    associations.added = ff;
-    defaultApplications = ff;
-  };
   home.file.".local/bin".source = ./bin;
   home.sessionPath = [ "$HOME/.local/bin" ];
   dconf.enable = true;

@@ -3,162 +3,157 @@
   programs.firefox = {
     # TODO: dark theme, vimperator/vimium/tridactyl/???, userChrome
     enable = true;
-    package = pkgs.firefox-esr-115.override {
-      extraPolicies = {
-        # 3rdparty
-        # AutoLaunchProtocolsFromOrigins
-        CaptivePortal = false;
-        # Cookies
-        DisableAppUpdate = true;
-        # DisabledCiphers
-        # DisableFeedbackCommands
-        DisableFirefoxAccounts = true;
-        DisableFirefoxScreenshots = true;
-        DisableFirefoxStudies = true;
-        DisableForgetButton = true;
-        DisableFormHistory = true;
-        DisableMasterPasswordCreation = true;
-        DisablePasswordReveal = true;
-        DisablePocket = true;
-        DisablePrivateBrowsing = true;
-        DisableSetDesktopBackground = true;
+    package = pkgs.firefox-esr-115;
+    policies = {
+      # 3rdparty
+      # AutoLaunchProtocolsFromOrigins
+      CaptivePortal = false;
+      # Cookies
+      DisableAppUpdate = true;
+      # DisabledCiphers
+      # DisableFeedbackCommands
+      DisableFirefoxAccounts = true;
+      DisableFirefoxScreenshots = true;
+      DisableFirefoxStudies = true;
+      DisableForgetButton = true;
+      DisableFormHistory = true;
+      DisableMasterPasswordCreation = true;
+      DisablePasswordReveal = true;
+      DisablePocket = true;
+      DisablePrivateBrowsing = true;
+      DisableSetDesktopBackground = true;
 
-        # This should also prevent system add-ons from being installed in the first place
-        DisableSystemAddonUpdate = true;
-        DisableTelemetry = true;
-        DisplayBookmarksToolbar = "never";
-        DisplayMenuBar = "default-off";
-        # DNSOverHTTPS
-        DontCheckDefaultBrowser = true;
-        # EnableTrackingProtection is covered by arkenfox
-        # EncryptedMediaExtensions can be covered by arkenfox
-        # Extensions, ExtensionSettings, ExtensionUpdate
-        FirefoxHome = {
-          Search = false;
-          TopSites = false;
-          SponsoredTopSites = false;
-          Highlights = false;
-          Pocket = false;
-          SponsoredPocket = false;
-          Snippets = false;
-          # Locked = true;
-        };
-        # Handlers
-        # HardwareAcceleration
-        Homepage = {
-          URL = "about:blank";
-          Additional = [ ];
-          StartPage = "none";
-          # Locked = true;
-        };
-        InstallAddonsPermission = {
-          Allow = [ ];
-          Default = false;
-        };
-        # ManagedBookmarks
-        NetworkPrediction = false;
-        NewTabPage = false;
-        NoDefaultBookmarks = true;
-        OfferToSaveLogins = false;
-        OverrideFirstRunPage = "";
-        OverridePostUpdatePage = "";
-        PasswordManagerEnabled = false;
-        PDFjs = {
-          # same as not DisableBuiltinPDFViewer
-          Enabled = true;
-          EnablePermissions = false;
-        };
-        # TODO: reconsider? apparently these are easily fingerprintable
-        Permissions =
-          let
-            NOPE = {
-              Allow = [ ];
-              Block = [ ];
-              BlockNewRequests = true;
-              Locked = true;
-            };
-          in
-          {
-            Camera = NOPE;
-            #Microphone = NOPE;
-            Location = NOPE;
-            # Notifications = NOPE;
-            Autoplay = {
-              Allow = [ ];
-              Block = [ ];
-              Default = "block-audio-video";
-              Locked = true;
-            };
-          };
-        PictureInPicture = {
-          # unsure if this is cool or not
-          Enabled = false;
-          Locked = false;
-        };
-        PopupBlocking = {
-          Default = true;
-          Locked = false;
-        };
-        # Preferences
-        PromptForDownloadLocation = true;
-        # Proxy
-        # SanitizeOnShutdown is covered by arkenfox
-        SearchBar = "unified";
-        SearchEngines = {
-          Add = [
-            {
-              Name = "Nix Options";
-              URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
-              Method = "GET";
-              Alias = "no";
-            }
-            {
-              Name = "Nix Packages";
-              URLTemplate = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
-              Method = "GET";
-              Alias = "np";
-            }
-            {
-              Name = "Pursuit";
-              URLTemplate = "https://pursuit.purescript.org/search?q={searchTerms}";
-              Method = "GET";
-              Alias = "ps";
-            }
-            {
-              Name = "Hoogle";
-              URLTemplate = "https://hoogle.haskell.org/?hoogle={searchTerms}";
-              Method = "GET";
-              Alias = "hs";
-            }
-            {
-              Name = "Home-manager Options";
-              URLTemplate = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}";
-              Method = "GET";
-              Alias = "ho";
-            }
-          ];
-          Default = "DuckDuckGo";
-          PreventInstalls = true;
-          Remove = [ "Google" "Amazon.com" "Bing" "eBay" "Wikipedia (en)" ];
-        };
-        SearchSuggestEnabled = false;
-        ShowHomeButton = false;
-        # SSLVersionMin
-        StartDownloadsInTempDirectory = true;
-        UserMessaging = {
-          WhatsNew = false;
-          ExtensionRecommendations = false;
-          FeatureRecommendations = false;
-          UrlbarInterventions = false;
-          SkipOnboarding = true;
-          MoreFromMozilla = false;
-        };
-        # UseSystemPrintDialog
+      # This should also prevent system add-ons from being installed in the first place
+      DisableSystemAddonUpdate = true;
+      DisableTelemetry = true;
+      DisplayBookmarksToolbar = "never";
+      DisplayMenuBar = "default-off";
+      # DNSOverHTTPS
+      DontCheckDefaultBrowser = true;
+      # EnableTrackingProtection is covered by arkenfox
+      # EncryptedMediaExtensions can be covered by arkenfox
+      # Extensions, ExtensionSettings, ExtensionUpdate
+      FirefoxHome = {
+        Search = false;
+        TopSites = false;
+        SponsoredTopSites = false;
+        Highlights = false;
+        Pocket = false;
+        SponsoredPocket = false;
+        Snippets = false;
+        # Locked = true;
       };
-      extraPrefs = ''
-        // TODO
-        // lockPref("", true);
-      '';
+      # Handlers
+      # HardwareAcceleration
+      Homepage = {
+        URL = "about:blank";
+        Additional = [ ];
+        StartPage = "none";
+        # Locked = true;
+      };
+      InstallAddonsPermission = {
+        Allow = [ ];
+        Default = false;
+      };
+      # ManagedBookmarks
+      NetworkPrediction = false;
+      NewTabPage = false;
+      NoDefaultBookmarks = true;
+      OfferToSaveLogins = false;
+      OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
+      PasswordManagerEnabled = false;
+      PDFjs = {
+        # same as not DisableBuiltinPDFViewer
+        Enabled = true;
+        EnablePermissions = false;
+      };
+      # TODO: reconsider? apparently these are easily fingerprintable
+      Permissions =
+        let
+          NOPE = {
+            Allow = [ ];
+            Block = [ ];
+            BlockNewRequests = true;
+            Locked = true;
+          };
+        in
+        {
+          Camera = NOPE;
+          #Microphone = NOPE;
+          Location = NOPE;
+          # Notifications = NOPE;
+          Autoplay = {
+            Allow = [ ];
+            Block = [ ];
+            Default = "block-audio-video";
+            Locked = true;
+          };
+        };
+      PictureInPicture = {
+        # unsure if this is cool or not
+        Enabled = false;
+        Locked = false;
+      };
+      PopupBlocking = {
+        Default = true;
+        Locked = false;
+      };
+      # Preferences
+      PromptForDownloadLocation = true;
+      # Proxy
+      # SanitizeOnShutdown is covered by arkenfox
+      SearchBar = "unified";
+      SearchEngines = {
+        Add = [
+          {
+            Name = "Nix Options";
+            URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
+            Method = "GET";
+            Alias = "no";
+          }
+          {
+            Name = "Nix Packages";
+            URLTemplate = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
+            Method = "GET";
+            Alias = "np";
+          }
+          {
+            Name = "Pursuit";
+            URLTemplate = "https://pursuit.purescript.org/search?q={searchTerms}";
+            Method = "GET";
+            Alias = "ps";
+          }
+          {
+            Name = "Hoogle";
+            URLTemplate = "https://hoogle.haskell.org/?hoogle={searchTerms}";
+            Method = "GET";
+            Alias = "hs";
+          }
+          {
+            Name = "Home-manager Options";
+            URLTemplate = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}";
+            Method = "GET";
+            Alias = "ho";
+          }
+        ];
+        Default = "DuckDuckGo";
+        PreventInstalls = true;
+        Remove = [ "Google" "Amazon.com" "Bing" "eBay" "Wikipedia (en)" ];
+      };
+      SearchSuggestEnabled = false;
+      ShowHomeButton = false;
+      # SSLVersionMin
+      StartDownloadsInTempDirectory = true;
+      UserMessaging = {
+        WhatsNew = false;
+        ExtensionRecommendations = false;
+        FeatureRecommendations = false;
+        UrlbarInterventions = false;
+        SkipOnboarding = true;
+        MoreFromMozilla = false;
+      };
+      # UseSystemPrintDialog
     };
     arkenfox = {
       enable = true;
@@ -196,6 +191,8 @@
         "0900".enable = true;
         "1000".enable = true;
         "1200".enable = true;
+        # do not require OCSP (breaks some sites I need to use?)
+        "1200"."1212"."security.OCSP.require".enable = false;
         "1600".enable = true;
         "1700".enable = true;
         # 2000 EME
@@ -204,11 +201,9 @@
         "2700".enable = true;
         "2800" = {
           enable = true;
-          # TODO when updating to firefox 103+, re-enable and get rid of network.cookie.lifetimePolicy = 2
-          # re-enabled (it's true now)
-          # "2811"."privacy.clearOnShutdown.cookies".value = false;
         };
-        "4500".enable = true;
+        # disable RFP for now
+        "4500".enable = false;
         "6000".enable = true;
         "9000".enable = true;
       };
@@ -230,6 +225,8 @@
         "browser.urlbar.suggest.topsites" = false;
         # enable font bounding box text metrics
         "dom.textMetrics.fontBoundingBox.enabled" = true;
+        # breakage
+        "security.OCSP.require" = false;
         #   "browser.bookmarks.defaultLocation" = "unfiled";
         #   "browser.download.panel.shown" = true;
         # ugh

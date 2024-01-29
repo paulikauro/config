@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, config-dir, ... }:
 let
   editor = "emacsclient -c";
 in
@@ -59,6 +59,7 @@ in
     ednix = "( cd /etc/nixos && ${editor} )";
     e = editor;
   };
+  home.file.".ideavimrc".source = config.lib.file.mkOutOfStoreSymlink "${config-dir}/.ideavimrc";
   services.emacs = {
     enable = false; # todo
     startWithUserSession = true;

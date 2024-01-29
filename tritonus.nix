@@ -10,6 +10,10 @@
     ./common.nix
   ];
 
+  services.openssh = {
+    enable = false;
+  };
+
   networking = {
     hostName = "tritonus";
     interfaces.enp6s0.useDHCP = true;

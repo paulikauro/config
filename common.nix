@@ -62,6 +62,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    config.common.default = "*";
   };
   # this can have unforeseen consequences but we're setting it anyway!!!
   environment.sessionVariables.GTK_USE_PORTAL = "1";
