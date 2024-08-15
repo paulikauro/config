@@ -18,6 +18,7 @@
         devices = {
           thonkpad.id = "O2T4MYU-HLHROBL-7AMG7ND-GCIG36U-UEEXTJL-E5XQ45H-S3XXDQW-ZHVURQL";
           tritonus.id = "QPXZZ5I-5SWA5NK-5SYUCGW-UZGZM73-O4WUYPH-MDRDYKB-HFFDHIT-FM5LCA2";
+          hupelin.id = "SVPSX7W-WFT5VD7-L76BPGK-AHQBQOZ-C3KIR6J-KHBG3LR-5G2H5LS-INKJMAY";
         };
         folders = {
           "/persist" = {
@@ -26,6 +27,14 @@
             devices = [ "thonkpad" "tritonus" ];
             # sync permissions too!
             ignorePerms = false;
+          };
+          # note that hupelin is not persisted!
+          "/home/${theUsername}/hupelin" = {
+            id = "xdqzd-1k8sj";
+            label = "hupelin";
+            devices = [ "hupelin" "thonkpad" "tritonus" ];
+            # dont rly care
+            ignorePerms = true;
           };
         };
       };
@@ -91,7 +100,7 @@
         directories = [
           "stash"
           ".config/emacs"
-          ".config/ardour7"
+          ".config/ardour8"
           ".local/share/PrismLauncher"
         ];
       };
@@ -103,6 +112,7 @@
           ".config/discord"
           ".config/kopia"
           ".config/pulse"
+          ".config/unity3d"
           ".ssh"
           ".local/share/direnv"
           ".local/share/containers"

@@ -1,4 +1,4 @@
-{ config, pkgs, config-dir, ... }:
+{ config, pkgs, config-dir, pkgs-wine94, ... }:
 with pkgs.lib;
 with pkgs.lib.attrsets;
 {
@@ -12,7 +12,6 @@ with pkgs.lib.attrsets;
     xorg.xbacklight
     zoom-us
     telegram-desktop
-    x42-plugins
     libreoffice
     qpwgraph
     virt-manager
@@ -36,19 +35,31 @@ with pkgs.lib.attrsets;
     poppler_utils
     youtube-dl
     ffmpeg
-    audacity
     pcmanfm
+
     vlc
-    # fluidsynth
-    # soundfont-fluid
-    # musescore
+    fluidsynth
+    soundfont-fluid
+    musescore
+    audacity
+    transcribe
     # reaper
+    #rosegarden
     ardour
+    x42-plugins
+    x42-avldrums
+    lsp-plugins
+    # wine issues...
+    pkgs-wine94.yabridge
+    pkgs-wine94.yabridgectl
+    guitarix
+    neural-amp-modeler-lv2
+    hydrogen
+
     razergenie
     xorg.xev
     xcape
     tigervnc
-    #rosegarden
     arandr
     djview
     feh
@@ -87,7 +98,6 @@ with pkgs.lib.attrsets;
     lshw
     killall
     # helvum
-    # guitarix
     sbctl
     dmidecode
     efibootmgr
@@ -95,7 +105,7 @@ with pkgs.lib.attrsets;
     unar
   ];
   home.sessionVariables = {
-    LV2_PATH = "${pkgs.x42-plugins}/lib/lv2";
+    LV2_PATH = "${pkgs.x42-plugins}/lib/lv2:${pkgs.x42-avldrums}/lib/lv2:${pkgs.lsp-plugins}/lib/lv2:${pkgs.guitarix}/lib/lv2:${pkgs.neural-amp-modeler-lv2}/lib/lv2";
   };
   xdg.configFile."keepassxc/keepassxc.ini".source = config.lib.file.mkOutOfStoreSymlink "${config-dir}/keepassxc.ini";
   home.file.".local/bin".source = ./bin;

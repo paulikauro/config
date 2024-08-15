@@ -20,6 +20,7 @@
     };
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
+    kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_6;
   };
 
   fileSystems = {

@@ -7,6 +7,7 @@
     };
     nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-wine94.url = "github:nixos/nixpkgs/f60836eb3a850de917985029feaea7338f6fcb8a";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
     # TODO remove when lanzaboote updates
@@ -31,7 +32,7 @@
       flake = false; # :((
     };
   };
-  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, rust-overlay, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, ... }@args:
+  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, rust-overlay, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, nixpkgs-wine94, ... }@args:
     let
       theUsername = "pauli";
       dataModules = import ./data.nix;
@@ -64,6 +65,7 @@
                 extraSpecialArgs = {
                   config-dir = "/etc/nixos";
                   inherit theUsername;
+                  pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
                 } // args;
                 users.${theUsername} = { pkgs, ... }: {
                   imports = [
@@ -108,6 +110,7 @@
                 extraSpecialArgs = {
                   config-dir = "/etc/nixos";
                   inherit theUsername;
+                  pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
                 } // args;
                 users.${theUsername} = { pkgs, ... }: {
                   imports = [

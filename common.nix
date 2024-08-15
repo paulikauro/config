@@ -32,7 +32,7 @@
       systemd.enable = true;
     };
     # TODO: something
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" "btrfs" ];
     bootspec.enable = true;
     lanzaboote = {
