@@ -86,9 +86,6 @@
     };
   };
 
-  sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
   security.pam.loginLimits = [
     { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
     { domain = "@audio"; item = "rtprio"; type = "-"; value = "95"; }

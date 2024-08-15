@@ -20,8 +20,8 @@
   };
 
   hardware.amdgpu = {
-    amdvlk = false;
-    loadInInitrd = true;
+    amdvlk.enable = false;
+    initrd.enable = true;
   };
 
   system.stateVersion = "23.05"; # Did you read the comment? nah.

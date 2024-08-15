@@ -1,9 +1,9 @@
 { pkgs, self, nixpkgs, nur, nil, emacs-overlay, ... }: {
   nix = {
     registry.nixpkgs.flake = nixpkgs;
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [ "nix-command" "flakes" ];
       keep-outputs = true;
       keep-derivations = true;
       substituters = [

@@ -33,7 +33,7 @@ with pkgs.lib.attrsets;
     redshift
     discord
     poppler_utils
-    youtube-dl
+    yt-dlp
     ffmpeg
     pcmanfm
 
