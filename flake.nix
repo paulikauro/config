@@ -27,10 +27,6 @@
         flake = false;
     };
     arkenfox-nixos.url = "github:dwarfmaster/arkenfox-nixos";
-    mobile-nixos = {
-      url = "github:NixOS/mobile-nixos";
-      flake = false; # :((
-    };
   };
   outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, rust-overlay, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, nixpkgs-wine94, ... }@args:
     let
@@ -129,42 +125,6 @@
             }
           ];
       };
-        tunkki = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = {
-            inherit theUsername;
-          } // args;
-          # important that nixpkgs goes to mobile-nixos in tunkki
-          modules = [
-            home-manager.nixosModules.home-manager
-            # impermanence.nixosModules.impermanence
-            # dataModules.nixosModule
-            ./nix-config.nix
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  config-dir = "/etc/nixos";
-                  inherit theUsername;
-                } // args;
-                users.${theUsername} = { pkgs, ... }: {
-                  imports = [
-                    # ./desktop-environment.nix
-                    # impermanence.nixosModules.home-manager.impermanence
-                    # dataModules.hmModule
-                    arkenfox-nixos.hmModules.arkenfox
-                  ];
-                  # TODO: cleanup
-                  home.stateVersion = "24.05";
-                  home.homeDirectory = "/home/${theUsername}";
-                  # home.username = theUsername; # not needed?
-                };
-              };
-            }
-            ./tunkki.nix
-          ];
-        };
     };
   };
 }
