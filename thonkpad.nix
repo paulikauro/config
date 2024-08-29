@@ -22,9 +22,9 @@
 
   hardware.amdgpu = {
     # this failed to compile shaders for whatever reason
-    amdvlk = false;
+    amdvlk.enable = false;
     # this seems to be the default but to be explicit
-    loadInInitrd = true;
+    initrd.enable = true;
   };
 
   # amd pstate?

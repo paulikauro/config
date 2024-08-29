@@ -103,7 +103,7 @@
     socketActivation = true;
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   hardware.openrazer = {
     enable = true;
@@ -123,25 +123,24 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
-  # todo: configure this
-  services.input-remapper.enable = true;
-
   services.udev.extraRules = ''
     ACTION=="add", ATTR{idVendor}=="0403", ATTR{manufacturer}=="Digilent", MODE:="666"
   '';
 
+  services.libinput = {
+    enable = true;
+    touchpad.tapping = false;
+    touchpad.disableWhileTyping = true;
+  };
+
   services.xserver = {
     enable = true;
     exportConfiguration = true;
-    layout = "us";
-    xkbVariant = "altgr-intl";
-    #xkbOptions = "caps:escape";
-
-    libinput = {
-      enable = true;
-      touchpad.tapping = false;
-      touchpad.disableWhileTyping = true;
+    xkb = {
+      variant = "altgr-intl";
+      layout = "us";
     };
+
 
     # so basically this is a hack to get i3 to show up as a session
     windowManager.i3 = {
