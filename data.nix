@@ -55,12 +55,14 @@
         ];
       };
       "/local" = {
-        # oop, actually, should persist /var/lib/nixos, /var/lib/systemd, /var/log/journal
         hideMounts = true;
         directories = [
           "/etc/NetworkManager/system-connections"
           "/etc/secureboot"
           "/etc/cert"
+          "/var/lib/nixos"
+          "/var/lib/systemd"
+          "/var/log/journal"
         ];
         files = [
           "/etc/machine-id"
