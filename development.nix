@@ -6,6 +6,7 @@ in
   imports = [ ];
   # TODO bind neovim path?
   home.packages = with pkgs; [
+    lsof
     racket
     jdk11
     jetbrains.idea-ultimate
