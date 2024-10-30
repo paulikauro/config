@@ -94,7 +94,7 @@
     { domain = "@audio"; item = "rtprio"; type = "-"; value = "95"; }
     { domain = "@audio"; item = "nice"; type = "-"; value = "-19"; }
     # todo: wtf, 1048576 not enough
-    { domain = "*"; item = "nofile"; type = "-"; value = "unlimited"; }
+    # { domain = "*"; item = "nofile"; type = "-"; value = "unlimited"; }
   ];
 
   services.pipewire = {
