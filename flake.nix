@@ -7,7 +7,6 @@
     };
     nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nixpkgs.url = "github:NixOS/nixpkgs/801efd4";
     #nixpkgs-wine94.url = "github:nixos/nixpkgs/f60836eb3a850de917985029feaea7338f6fcb8a";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
@@ -85,10 +84,10 @@
         };
         thonkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
+          specialArgs = args // {
             inherit theUsername;
             notrootDisk = "/dev/disk/by-uuid/c0bbd265-adbd-4957-911d-bab29592f613";
-          } // args;
+          };
           modules = [
             home-manager.nixosModules.home-manager
             impermanence.nixosModules.impermanence
