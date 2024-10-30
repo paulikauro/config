@@ -1,9 +1,9 @@
 { pkgs, config, config-dir, ... }:
 let
-  editor = "emacsclient -c";
+  editor = "vim";
 in
 {
-  imports = [ ];
+  imports = [ ./vscode ];
   # TODO bind neovim path?
   home.packages = with pkgs; [
     lsof

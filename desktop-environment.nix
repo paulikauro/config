@@ -1,4 +1,4 @@
-{ config, pkgs, config-dir, pkgs-wine94, ... }:
+{ config, pkgs, config-dir, /*pkgs-wine94,*/ ... }:
 with pkgs.lib;
 with pkgs.lib.attrsets;
 {
@@ -50,8 +50,8 @@ with pkgs.lib.attrsets;
     x42-avldrums
     lsp-plugins
     # wine issues...
-    pkgs-wine94.yabridge
-    pkgs-wine94.yabridgectl
+    #pkgs-wine94.yabridge
+    #pkgs-wine94.yabridgectl
     guitarix
     neural-amp-modeler-lv2
     hydrogen

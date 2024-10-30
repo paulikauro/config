@@ -7,7 +7,8 @@
     };
     nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-wine94.url = "github:nixos/nixpkgs/f60836eb3a850de917985029feaea7338f6fcb8a";
+    #nixpkgs.url = "github:NixOS/nixpkgs/801efd4";
+    #nixpkgs-wine94.url = "github:nixos/nixpkgs/f60836eb3a850de917985029feaea7338f6fcb8a";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
     # TODO remove when lanzaboote updates
@@ -27,8 +28,9 @@
         flake = false;
     };
     arkenfox-nixos.url = "github:dwarfmaster/arkenfox-nixos";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
-  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, rust-overlay, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, nixpkgs-wine94, ... }@args:
+  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, rust-overlay, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, /*nixpkgs-wine94,*/ nix-vscode-extensions, ... }@args:
     let
       theUsername = "pauli";
       dataModules = import ./data.nix;
@@ -37,10 +39,10 @@
       nixosConfigurations = {
         tritonus = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
+          specialArgs = args // {
             inherit theUsername;
             notrootDisk = "/dev/disk/by-uuid/49633c2c-82ca-4fa9-82a1-1b7d68f50ca5";
-          } // args;
+          };
           modules = [
             home-manager.nixosModules.home-manager
             impermanence.nixosModules.impermanence
@@ -58,18 +60,19 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = {
+                extraSpecialArgs = args // {
                   config-dir = "/etc/nixos";
                   inherit theUsername;
-                  pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
-                } // args;
+                  nix-vscode-extensions = nix-vscode-extensions.extensions.x86_64-linux;
+                  #pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
+                };
                 users.${theUsername} = { pkgs, ... }: {
                   imports = [
                     ./desktop-environment.nix
                     impermanence.nixosModules.home-manager.impermanence
                     dataModules.hmModule
                     arkenfox-nixos.hmModules.arkenfox
-                    (_: { stylix.targets.vscode.enable = false; })
+                    #(_: { stylix.targets.vscode.enable = false; })
                   ];
                   # TODO: cleanup
                   home.stateVersion = "23.05";
@@ -103,11 +106,12 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = {
+                extraSpecialArgs = args // {
                   config-dir = "/etc/nixos";
                   inherit theUsername;
-                  pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
-                } // args;
+                  nix-vscode-extensions = nix-vscode-extensions.extensions.x86_64-linux;
+                  #pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
+                };
                 users.${theUsername} = { pkgs, ... }: {
                   imports = [
                     ./desktop-environment.nix

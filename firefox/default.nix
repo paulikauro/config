@@ -3,7 +3,7 @@
   programs.firefox = {
     # TODO: dark theme, vimperator/vimium/tridactyl/???, userChrome
     enable = true;
-    package = pkgs.firefox-esr-115;
+    package = pkgs.firefox-esr-128;
     policies = {
       # 3rdparty
       # AutoLaunchProtocolsFromOrigins
@@ -157,7 +157,7 @@
     };
     arkenfox = {
       enable = true;
-      version = "115.1";
+      version = "128.0";
     };
     profiles.default = {
       id = 0;
@@ -183,8 +183,6 @@
         };
         "0800" = {
           enable = true;
-          # disable tab to search
-          "0808"."browser.urlbar.suggest.engines".enable = true;
           # no visited link coloring
           "0820"."layout.css.visited_links_enabled".enable = true;
         };
