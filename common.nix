@@ -124,6 +124,14 @@
     '';
   };
 
+  # services.printing.enable = true;
+
+  #services.avahi = {
+  #  enable = true;
+  #  nssmdns4 = true;
+  #  openFirewall = true;
+  #};
+
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;

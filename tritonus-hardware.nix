@@ -21,7 +21,6 @@
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_6;
-    #kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_11;
   };
 
   fileSystems = {

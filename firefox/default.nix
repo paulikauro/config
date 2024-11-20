@@ -145,6 +145,7 @@
       ShowHomeButton = false;
       # SSLVersionMin
       StartDownloadsInTempDirectory = true;
+      TranslateEnabled = false;
       UserMessaging = {
         WhatsNew = false;
         ExtensionRecommendations = false;

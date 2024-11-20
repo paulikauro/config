@@ -43,7 +43,7 @@ with pkgs.lib.attrsets;
     musescore
     audacity
     transcribe
-    # reaper
+    reaper
     #rosegarden
     ardour
     x42-plugins

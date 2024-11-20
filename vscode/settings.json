@@ -1,0 +1,184 @@
+{
+    "calva.prettyPrintingOptions": {
+        "enabled": true,
+        "maxLength": 50,
+        "printEngine": "pprint",
+        "width": 120
+    },
+    "clangd.onConfigChanged": "restart",
+    "editor.fontFamily": "'JetBrainsMono'",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "haskell.manageHLS": "PATH",
+    "keyboard.dispatch": "keyCode",
+    "lldb.suppressUpdateNotifications": true,
+    "telemetry.telemetryLevel": "off",
+    "terminal.integrated.fontFamily": "'JetBrainsMono'",
+    "vscode-neovim.neovimInitVimPaths.linux": "/etc/nixos/vscode/vscode.vim",
+    "latex-input.mappings": "/etc/nixos/vscode/latex-input-mappings.json",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "update.mode": "none",
+    "extensions.autoCheckUpdates": true,
+    "extensions.autoUpdate": false,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "workbench.editor.languageDetection": false,
+    "vspacecode.bindingOverrides": [
+        {
+            "keys": "k",
+            "name": "paredit",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "s",
+                    "name": "slurp/barf",
+                    "type": "bindings",
+                    "bindings": [
+                        {
+                            "key": "k",
+                            "name": "slurp forward",
+                            "type": "command",
+                            "command": "paredit.slurpSexpForward"
+                        },
+                        {
+                            "key": "l",
+                            "name": "barf forward",
+                            "type": "command",
+                            "command": "paredit.barfSexpForward"
+                        },
+                        {
+                            "key": "j",
+                            "name": "slurp backward",
+                            "type": "command",
+                            "command": "paredit.slurpSexpBackward"
+                        },
+                        {
+                            "key": "h",
+                            "name": "barf backward",
+                            "type": "command",
+                            "command": "paredit.barfSexpBackward"
+                        }
+                    ]
+                },
+                {
+                    "key": "w",
+                    "name": "wrap",
+                    "type": "bindings",
+                    "bindings": [
+                        {
+                            "key": "(",
+                            "name": "wrap around parens",
+                            "type": "command",
+                            "command": "paredit.wrapAroundParens"
+                        },
+                        {
+                            "key": "{",
+                            "name": "wrap around curly",
+                            "type": "command",
+                            "command": "paredit.wrapAroundCurly"
+                        },
+                        {
+                            "key": "[",
+                            "name": "wrap around square",
+                            "type": "command",
+                            "command": "paredit.wrapAroundSquare"
+                        },
+                        {
+                            "key": "\"",
+                            "name": "wrap around quote",
+                            "type": "command",
+                            "command": "paredit.wrapAroundQuote"
+                        },
+                        {
+                            "key": "w",
+                            "name": "rewrap",
+                            "type": "bindings",
+                            "bindings": [
+                                {
+                                    "key": "(",
+                                    "name": "rewrap parens",
+                                    "type": "command",
+                                    "command": "paredit.rewrapParens"
+                                },
+                                {
+                                    "key": "{",
+                                    "name": "rewrap curly",
+                                    "type": "command",
+                                    "command": "paredit.rewrapCurly"
+                                },
+                                {
+                                    "key": "[",
+                                    "name": "rewrap square",
+                                    "type": "command",
+                                    "command": "paredit.rewrapSquare"
+                                },
+                                {
+                                    "key": "\"",
+                                    "name": "rewrap quote",
+                                    "type": "command",
+                                    "command": "paredit.rewrapQuote"
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "key": "k",
+                    "name": "kill & variants",
+                    "type": "bindings",
+                    "bindings": [
+                        {
+                            "key": "l",
+                            "name": "kill list forward",
+                            "type": "command",
+                            "command": "paredit.killListForward"
+                        },
+                        {
+                            "key": "k",
+                            "name": "kill sexp forward",
+                            "type": "command",
+                            "command": "paredit.killSexpForward"
+                        },
+                        {
+                            "key": "j",
+                            "name": "kill sexp backward",
+                            "type": "command",
+                            "command": "paredit.killSexpBackward"
+                        },
+                        {
+                            "key": "h",
+                            "name": "kill list backward",
+                            "type": "command",
+                            "command": "paredit.killListBackward"
+                        },
+                        {
+                            "key": "s",
+                            "name": "splice sexp",
+                            "type": "command",
+                            "command": "paredit.spliceSexp"
+                        },
+                        {
+                            "key": "r",
+                            "name": "raise sexp",
+                            "type": "command",
+                            "command": "paredit.raiseSexp"
+                        }
+                    ]
+                },
+                {
+                    "key": "t",
+                    "name": "transpose",
+                    "type": "command",
+                    "command": "paredit.transpose"
+                }
+            ]
+        }
+    ]
+}
