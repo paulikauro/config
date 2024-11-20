@@ -26,15 +26,16 @@
         "fromYaml": "fromYaml"
       },
       "locked": {
-        "lastModified": 1731966541,
-        "narHash": "sha256-AhX8QQBQLRqEWHftFibTmvlmh157134vzBYXW0LOBKo=",
+        "lastModified": 1732075760,
+        "narHash": "sha256-+R1BH5wHhfnycySb7Sy5KbYEaTJZWm1h+LW1OtyhiTs=",
         "owner": "SenchoPens",
         "repo": "base16.nix",
-        "rev": "d8e769add6333892b44afc107f193074a5072717",
+        "rev": "5322a1628f1f038e1dd31a22370391cbdb50768a",
         "type": "github"
       },
       "original": {
         "owner": "SenchoPens",
+        "ref": "refs/pull/19/head",
         "repo": "base16.nix",
         "type": "github"
       }
@@ -706,11 +707,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1732134607,
-        "narHash": "sha256-vWkWJWMujimxIan8vSSXmB6ujov6SgQca3wD4c2EGIk=",
+        "lastModified": 1732140964,
+        "narHash": "sha256-OrmDjtdoUqsWE7DPwEgn+a3qcPMX21f7uCzMnDjxdFs=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "34ea536162b11e0db2449bd2eb248dccce1bb9e6",
+        "rev": "a1d4c79a93b4a56127c152f4eec71eee63f8f5e6",
         "type": "github"
       },
       "original": {
@@ -770,6 +771,7 @@
     "root": {
       "inputs": {
         "arkenfox-nixos": "arkenfox-nixos",
+        "base16": "base16",
         "base16-schemes": "base16-schemes",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
@@ -825,7 +827,9 @@
     },
     "stylix": {
       "inputs": {
-        "base16": "base16",
+        "base16": [
+          "base16"
+        ],
         "base16-fish": "base16-fish",
         "base16-helix": "base16-helix",
         "base16-vim": "base16-vim",
