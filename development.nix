@@ -3,7 +3,7 @@ let
   editor = "vim";
 in
 {
-  imports = [ ./vscode ];
+  imports = [ ./vscode ./zed ];
   # TODO bind neovim path?
   home.packages = with pkgs; [
     lsof

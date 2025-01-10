@@ -10,6 +10,7 @@ with pkgs.lib.attrsets;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     xorg.xbacklight
+    vcv-rack
     zoom-us
     telegram-desktop
     libreoffice

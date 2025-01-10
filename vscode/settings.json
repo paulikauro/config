@@ -6,7 +6,7 @@
         "width": 120
     },
     "clangd.onConfigChanged": "restart",
-    "editor.fontFamily": "'JetBrainsMono'",
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
@@ -14,7 +14,7 @@
     "keyboard.dispatch": "keyCode",
     "lldb.suppressUpdateNotifications": true,
     "telemetry.telemetryLevel": "off",
-    "terminal.integrated.fontFamily": "'JetBrainsMono'",
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
     "vscode-neovim.neovimInitVimPaths.linux": "/etc/nixos/vscode/vscode.vim",
     "latex-input.mappings": "/etc/nixos/vscode/latex-input-mappings.json",
     "extensions.experimental.affinity": {
@@ -24,7 +24,7 @@
     "extensions.autoCheckUpdates": true,
     "extensions.autoUpdate": false,
     "github.copilot.enable": {
-        "*": false,
+        "*": true,
         "plaintext": false,
         "markdown": false,
         "scminput": false

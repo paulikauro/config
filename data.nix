@@ -123,6 +123,7 @@
           ".local/share/emacs"
           ".local/share/bottles"
           ".mozilla/firefox"
+          ".unison"
         ];
       };
     };
