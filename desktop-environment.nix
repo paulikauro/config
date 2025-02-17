@@ -71,7 +71,8 @@ with pkgs.lib.attrsets;
     # zoom-us
     # wine
     # winetricks
-    (retroarch.override { cores = with libretro; [ nestopia ]; })
+    # this no longer works with retroatch
+    # (retroarch.override { cores = with libretro; [ nestopia ]; })
     protontricks
 
     openssl

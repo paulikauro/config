@@ -23,7 +23,7 @@
   system.configurationRevision = self.rev or "dirty-git-tree";
   nixpkgs = {
     overlays = [
-      nur.overlay
+      nur.overlays.default
       nil.overlays.nil
       emacs-overlay.overlays.emacs
       #(import ./discord-fix.nix)

@@ -10,6 +10,7 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
+    "editor.codeLens": false,
     "haskell.manageHLS": "PATH",
     "keyboard.dispatch": "keyCode",
     "lldb.suppressUpdateNotifications": true,
@@ -24,7 +25,7 @@
     "extensions.autoCheckUpdates": true,
     "extensions.autoUpdate": false,
     "github.copilot.enable": {
-        "*": true,
+        "*": false,
         "plaintext": false,
         "markdown": false,
         "scminput": false

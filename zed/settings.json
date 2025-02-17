@@ -1,4 +1,12 @@
 {
+    "assistant": {
+        "default_model": {
+            "provider": "copilot_chat",
+            "model": "gpt-4o"
+        },
+        "version": "2"
+    },
+    "theme": "One Dark",
     "telemetry": {
         "diagnostics": false,
         "metrics": false
