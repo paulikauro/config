@@ -22,7 +22,7 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nil.url = "github:oxalica/nil";
     # HAX https://github.com/danth/stylix/issues/642
-    base16.url = "github:SenchoPens/base16.nix?ref=refs/pull/19/head";
+    base16.url = "github:SenchoPens/base16.nix";
     stylix.url = "github:danth/stylix";
     stylix.inputs.base16.follows = "base16";
     base16-schemes = {

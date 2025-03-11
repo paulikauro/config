@@ -12,6 +12,11 @@
       name = "JetBrainsMono";
       package = pkgs.nerd-fonts.jetbrains-mono;
     };
+    # bruh these don't exist?
+    # targets = {
+      # vscode.profileNames = [ "default" ];
+      # firefox.profileNames = [ "default" ];
+    # };
   };
 }
 

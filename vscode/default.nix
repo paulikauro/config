@@ -22,7 +22,7 @@ in
     vscode = {
       enable = true;
       package = vsc-package;
-      extensions = with vsc-exts.vscode-marketplace; [
+      profiles.default.extensions = with vsc-exts.vscode-marketplace; [
         ms-vscode.cmake-tools
         twxs.cmake
         slevesque.shader
