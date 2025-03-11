@@ -19,6 +19,7 @@
           thonkpad.id = "O2T4MYU-HLHROBL-7AMG7ND-GCIG36U-UEEXTJL-E5XQ45H-S3XXDQW-ZHVURQL";
           tritonus.id = "QPXZZ5I-5SWA5NK-5SYUCGW-UZGZM73-O4WUYPH-MDRDYKB-HFFDHIT-FM5LCA2";
           hupelin.id = "SVPSX7W-WFT5VD7-L76BPGK-AHQBQOZ-C3KIR6J-KHBG3LR-5G2H5LS-INKJMAY";
+          pikseli.id = "SQKNZBU-IKIUTW7-MLHVTVC-N34REAF-M6ITSW7-NPKKBIZ-VUIJ53Y-GGIQAQ2";
         };
         folders = {
           "/persist" = {
@@ -32,7 +33,7 @@
           "/home/${theUsername}/hupelin" = {
             id = "xdqzd-1k8sj";
             label = "hupelin";
-            devices = [ "hupelin" "thonkpad" "tritonus" ];
+            devices = [ "pikseli" "hupelin" "thonkpad" "tritonus" ];
             # dont rly care
             ignorePerms = true;
           };
