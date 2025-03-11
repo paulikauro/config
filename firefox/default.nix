@@ -164,7 +164,7 @@
       id = 0;
       name = "Default";
       isDefault = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         multi-account-containers
       ];
@@ -207,6 +207,8 @@
         "9000".enable = true;
       };
       settings = {
+        # attempt to auto enable extensions
+        "extensions.autoDisableScopes" = 0;
         # disable annoying "It looks like you haven't started Firefox in a while" popup
         "browser.disableResetPrompt" = true;
         # TODO replace with clearOnShutdown after upgrading to firefox 103+

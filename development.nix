@@ -44,7 +44,7 @@ in
     fd
     ripgrep
     # the default tree-sitter plugins are fine
-    emacs29
+    emacs30
     emacs-all-the-icons-fonts
   ] ++ (with nodePackages; [
     purescript-language-server
