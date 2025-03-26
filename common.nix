@@ -82,9 +82,14 @@
     enable = true;
     keyboards.default = {
       ids = [ "*" ];
-      settings.main = {
-        capslock = "overload(control, esc)";
-        esc = "capslock";
+      settings = {
+        main = {
+          capslock = "overload(control, esc)";
+          esc = "capslock";
+        };
+        global = {
+          overload_tap_timeout = "200";
+        };
       };
     };
   };
