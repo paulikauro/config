@@ -119,6 +119,7 @@
           ".config/unity3d"
           ".config/JetBrains"
           ".ssh"
+          ".java"
           ".local/share/direnv"
           ".local/share/containers"
           ".local/share/TelegramDesktop"
