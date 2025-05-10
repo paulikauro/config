@@ -19,12 +19,11 @@ with pkgs.lib.attrsets;
     # (nerdfonts.override { fonts = ["JetBrainsMono"]; })
     # jetbrains-mono
     xfce.xfce4-terminal
-    calibre
+    # calibre
     # TODO: is this needed?
     networkmanagerapplet
     libnotify
     pavucontrol
-    # libreoffice
     # TODO: move somewhere
     mupdf
     # teams
@@ -54,7 +53,7 @@ with pkgs.lib.attrsets;
     #pkgs-wine94.yabridge
     #pkgs-wine94.yabridgectl
     guitarix
-    neural-amp-modeler-lv2
+    # neural-amp-modeler-lv2
     hydrogen
 
     razergenie

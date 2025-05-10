@@ -76,6 +76,7 @@
     adb.enable = true;
     steam.enable = true;
     wireshark.enable = true;
+    i3lock.enable = true;
   };
 
   services.keyd = {
