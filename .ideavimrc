@@ -1,3 +1,4 @@
 set clipboard+=unnamed
 let mapleader=" "
 map <leader>fs :action SaveAll<CR>
+set ideajoin
