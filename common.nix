@@ -103,7 +103,8 @@
     # { domain = "*"; item = "nofile"; type = "-"; value = "unlimited"; }
   ];
 
-  services.pipewire = {
+  security.rtkit.enable = true;
+  services.pipewire = let fs = 44100; q = "32"; qfs = "${q}/${builtins.toString fs}"; in {
     enable = true;
     alsa = {
       enable = true;
@@ -112,6 +113,32 @@
     jack.enable = true;
     pulse.enable = true;
     socketActivation = true;
+    /*extraConfig.pipewire."92-low-latency" = {
+      "context.properties" = {
+        "default.clock.rate" = fs;
+        "default.clock.quantum" = q;
+        "default.clock.min-quantum" = q;
+        "default.clock.max-quantum" = q;
+      };
+    };
+    extraConfig.pipewire-pulse."92-low-latency" = {
+      context.modules = [
+        {
+          name = "libpipewire-module-protocol-pulse";
+          args = {
+            pulse.min.req = qfs;
+            pulse.default.req = qfs;
+            pulse.max.req = qfs;
+            pulse.min.quantum = qfs;
+            pulse.max.quantum = qfs;
+          };
+        }
+      ];
+      stream.properties = {
+        node.latency = qfs;
+        resample.quality = 1;
+      };
+    };*/
   };
 
   hardware.graphics.enable = true;
