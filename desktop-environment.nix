@@ -13,6 +13,7 @@ with pkgs.lib.attrsets;
     vcv-rack
     zoom-us
     telegram-desktop
+    signal-desktop
     libreoffice
     qpwgraph
     virt-manager

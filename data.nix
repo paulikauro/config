@@ -117,6 +117,7 @@
           ".config/kopia"
           ".config/pulse"
           ".config/unity3d"
+          ".config/Signal"
           ".config/JetBrains"
           ".ssh"
           ".java"
