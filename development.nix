@@ -25,7 +25,6 @@ in
     tree
     gdb
     graphviz
-    # jetbrains.idea-ultimate
     # verilator
     # verilog
     # gtkwave

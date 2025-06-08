@@ -41,7 +41,7 @@ in
         kahole.magit
         asvetliakov.vscode-neovim
         llvm-vs-code-extensions.vscode-clangd
-        vadimcn.vscode-lldb
+        #vadimcn.vscode-lldb
         dhall.dhall-lang
         dhall.vscode-dhall-lsp-server
         ziglang.vscode-zig
