@@ -119,6 +119,7 @@
           ".config/unity3d"
           ".config/Signal"
           ".config/JetBrains"
+          ".gradle"
           ".ssh"
           ".java"
           ".local/share/direnv"
