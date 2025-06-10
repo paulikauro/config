@@ -129,6 +129,7 @@
           ".local/share/bottles"
           ".local/share/JetBrains"
           ".mozilla/firefox"
+          ".m2"
           ".unison"
         ];
       };
