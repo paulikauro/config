@@ -1,15 +1,19 @@
 {
-    "assistant": {
-        "default_model": {
-            "provider": "copilot_chat",
-            "model": "gpt-4o"
-        },
-        "version": "2"
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
     },
-    "theme": "One Dark",
-    "telemetry": {
-        "diagnostics": false,
-        "metrics": false
-    },
-    "vim_mode": true
+    "version": "2"
+  },
+  "theme": "Base16 Gruvbox Material Dark, Medium",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "vim_mode": true,
+  "buffer_font_family": "JetBrainsMono",
+  "buffer_font_size": 16.0,
+  "ui_font_family": "DejaVu Sans",
+  "ui_font_size": 16.0
 }
