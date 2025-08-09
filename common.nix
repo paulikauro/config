@@ -157,6 +157,18 @@
     '';
   };
 
+  security.polkit = {
+    enable = true;
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (action.id == "org.freedesktop.systemd1.manage-units" && action.lookup("unit") == "keyd.service") {
+          return polkit.Result.YES;
+        }
+        return polkit.Result.NOT_HANDLED;
+      });
+    '';
+  };
+
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip ];
 
