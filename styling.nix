@@ -1,5 +1,10 @@
-{ base16-schemes, pkgs, ... }:
-{
+{ pkgs, inputs, ... }:
+let
+  inherit (inputs) base16-schemes stylix;
+in {
+  imports = [
+    stylix.nixosModules.stylix
+  ];
   stylix = {
     enable = true;
     image = pkgs.fetchurl {

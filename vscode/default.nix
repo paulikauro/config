@@ -1,7 +1,8 @@
-{ config, config-dir, lib, pkgs, nix-vscode-extensions, ... }:
+{ config, konf, lib, pkgs, wtf-nix-vscode-extensions, ... }:
 let
   vsc-package = pkgs.vscode;
-  vsc-exts = nix-vscode-extensions.forVSCodeVersion (vsc-package.version);
+  vsc-exts = wtf-nix-vscode-extensions.forVSCodeVersion (vsc-package.version);
+  inherit (konf) config-dir;
 in
 {
   # gh issue: whickey.show

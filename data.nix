@@ -2,8 +2,10 @@
   # TODO is there a need for only synced or only backed up? (persistent of course)
   # /persist: persistent, backed up, synced
   # /local: persistent, not backed up, not synced
-  nixosModule = { theUsername, notrootDisk, ... }:
-  {
+  nixosModule = { konf, ... }:
+  let
+    inherit (konf) theUsername notrootDisk;
+  in {
     services.syncthing = {
       enable = true;
       user = theUsername;
@@ -96,8 +98,8 @@
       }
     ];
   };
-  hmModule = { theUsername, ... }:
-  {
+
+  hmModule = {
     home.persistence = {
       "/persist/myhome" = {
         allowOther = true;

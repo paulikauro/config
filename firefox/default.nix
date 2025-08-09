@@ -1,4 +1,4 @@
-{ config, pkgs, config-dir, ... }:
+{ config, pkgs, ... }:
 {
   programs.firefox = {
     # TODO: dark theme, vimperator/vimium/tridactyl/???, userChrome

@@ -24,50 +24,19 @@
     arkenfox-nixos.url = "github:dwarfmaster/arkenfox-nixos";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
-  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, /*nixpkgs-wine94,*/ nix-vscode-extensions, ... }@args:
+  outputs = { nixpkgs, nixos-hardware, ... }@inputs:
     let
-      theUsername = "pauli";
-      dataModules = import ./data.nix;
       mkSystem = { notrootDisk, modules }: nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = args // {
-            inherit theUsername;
-            inherit notrootDisk;
+          specialArgs = {
+            inherit inputs;
+            konf = {
+              inherit notrootDisk;
+              theUsername = "pauli";
+              config-dir = "/etc/nixos";
+            };
           };
-          modules = [
-            home-manager.nixosModules.home-manager
-            impermanence.nixosModules.impermanence
-            lanzaboote.nixosModules.lanzaboote
-            dataModules.nixosModule
-            stylix.nixosModules.stylix
-            ./styling.nix
-            ./nix-config.nix
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = args // {
-                  config-dir = "/etc/nixos";
-                  inherit theUsername;
-                  nix-vscode-extensions = nix-vscode-extensions.extensions.x86_64-linux;
-                  #pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
-                };
-                users.${theUsername} = { pkgs, ... }: {
-                  imports = [
-                    ./desktop-environment.nix
-                    impermanence.nixosModules.home-manager.impermanence
-                    dataModules.hmModule
-                    arkenfox-nixos.hmModules.arkenfox
-                    #(_: { stylix.targets.vscode.enable = false; })
-                  ];
-                  # TODO: cleanup
-                  home.stateVersion = "23.05";
-                  home.homeDirectory = "/home/${theUsername}";
-                  # home.username = theUsername; # not needed?
-                };
-              };
-            }
-          ] ++ modules;
+          inherit modules;
       };
     in
     {

@@ -1,6 +1,7 @@
-{ pkgs, config, config-dir, ... }:
+{ pkgs, config, konf, ... }:
 let
   editor = "vim";
+  inherit (konf) config-dir;
 in
 {
   imports = [ ./vscode ./zed ];

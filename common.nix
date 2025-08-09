@@ -1,5 +1,42 @@
-{ pkgs, lib, theUsername, ... }:
-{
+{ pkgs, lib, konf, inputs, ... }:
+let
+  dataModules = import ./data.nix;
+  inherit (inputs) home-manager impermanence lanzaboote arkenfox-nixos;
+  inherit (konf) theUsername;
+in {
+  imports = [
+    home-manager.nixosModules.home-manager
+    impermanence.nixosModules.impermanence
+    lanzaboote.nixosModules.lanzaboote
+    ./styling.nix
+    ./nix-config.nix
+    dataModules.nixosModule
+  ];
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {
+      inherit inputs konf;
+      # ???
+      wtf-nix-vscode-extensions = inputs.nix-vscode-extensions.extensions.x86_64-linux;
+      #pkgs-wine94 = import nixpkgs-wine94 { system = "x86_64-linux"; }; # hax
+    };
+    users.${theUsername} = { pkgs, ... }: {
+      imports = [
+        ./desktop-environment.nix
+        impermanence.nixosModules.home-manager.impermanence
+        arkenfox-nixos.hmModules.arkenfox
+        dataModules.hmModule
+        #(_: { stylix.targets.vscode.enable = false; })
+      ];
+      # TODO: cleanup
+      home.stateVersion = "23.05";
+      home.homeDirectory = "/home/${theUsername}";
+      # home.username = theUsername; # not needed?
+    };
+  };
+
   boot = {
     loader = {
       # lanzaboote replaces systemd-boot

@@ -1,5 +1,7 @@
-{ config, config-dir, lib, pkgs, ... }:
-{
+{ config, konf, lib, pkgs, ... }:
+let
+  inherit (konf) config-dir;
+in {
   xdg.configFile."zed/settings.json".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${config-dir}/zed/settings.json");
   xdg.configFile."zed/keymap.json".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${config-dir}/zed/keymap.json");
   #home.file."${config.xdg.configHome}/Code/User/settings.json".source =

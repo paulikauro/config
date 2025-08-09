@@ -1,4 +1,4 @@
-{ config, pkgs, lib, theUsername, ... }:
+{ config, pkgs, lib, ... }:
 {
   # TODO: packages-module?
   imports = [

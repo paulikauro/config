@@ -1,7 +1,8 @@
-{ config, pkgs, config-dir, /*pkgs-wine94,*/ ... }:
-with pkgs.lib;
-with pkgs.lib.attrsets;
-{
+{ config, pkgs, konf, /*pkgs-wine94,*/ ... }:
+let
+  inherit (konf) config-dir;
+  inherit (pkgs.lib) mapAttrs' listToAttrs imap0;
+in {
   # TODO:
   # - emacs service & client.. dev config? git, jetbrains tools
   # - dunst, polybar config, redshift config?

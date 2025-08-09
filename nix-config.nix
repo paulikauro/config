@@ -1,4 +1,7 @@
-{ pkgs, self, nixpkgs, nur, nil, emacs-overlay, ... }: {
+{ pkgs, inputs, ... }:
+let
+  inherit (inputs) self nixpkgs nur nil emacs-overlay;
+in {
   nix = {
     registry.nixpkgs.flake = nixpkgs;
     package = pkgs.nixVersions.latest;
