@@ -202,14 +202,6 @@ in {
         workspaces = listToAttrs (imap0 (index: name: { name = toString index; value = name; }) workspaceNames);
       in
       {
-        startup = [
-          /*{
-            command = "~/.local/bin/caps.sh";
-            always = true;
-            notification = false;
-            workspace = null;
-          }*/
-        ];
         assigns = {
           "2: web" = [{ class = "^Firefox$"; }];
         };
