@@ -254,6 +254,8 @@ with pkgs.lib.attrsets;
 
             b = "exec --no-startup-id redshift -O 3500K";
             "Shift+b" = "exec --no-startup-id redshift -x";
+            n = "exec --no-startup-id systemctl start keyd";
+            "Shift+n" = "exec --no-startup-id systemctl stop keyd";
 
             a = "focus parent";
             "Shift+a" = "focus child";
