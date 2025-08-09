@@ -29,7 +29,6 @@ in {
       nur.overlays.default
       nil.overlays.nil
       emacs-overlay.overlays.emacs
-      #(import ./discord-fix.nix)
     ];
     config.allowUnfree = true;
   };
