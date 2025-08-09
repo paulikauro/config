@@ -10,21 +10,13 @@
     #nixpkgs-wine94.url = "github:nixos/nixpkgs/f60836eb3a850de917985029feaea7338f6fcb8a";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
-    # TODO remove when lanzaboote updates
-    rust-overlay.url = "github:oxalica/rust-overlay";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
     };
-    # 100% cpu
-    #nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nil.url = "github:oxalica/nil";
-    # HAX https://github.com/danth/stylix/issues/642
-    base16.url = "github:SenchoPens/base16.nix";
     stylix.url = "github:danth/stylix";
-    stylix.inputs.base16.follows = "base16";
     base16-schemes = {
         url = "github:tinted-theming/base16-schemes";
         flake = false;
@@ -32,7 +24,7 @@
     arkenfox-nixos.url = "github:dwarfmaster/arkenfox-nixos";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
-  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, rust-overlay, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, /*nixpkgs-wine94,*/ nix-vscode-extensions, ... }@args:
+  outputs = { self, home-manager, nur, nixpkgs, nixos-hardware, impermanence, lanzaboote, emacs-overlay, nil, stylix, base16-schemes, arkenfox-nixos, /*nixpkgs-wine94,*/ nix-vscode-extensions, ... }@args:
     let
       theUsername = "pauli";
       dataModules = import ./data.nix;

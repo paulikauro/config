@@ -403,9 +403,7 @@
           "nixpkgs"
         ],
         "pre-commit-hooks-nix": "pre-commit-hooks-nix",
-        "rust-overlay": [
-          "rust-overlay"
-        ]
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
         "lastModified": 1754297745,
@@ -603,22 +601,6 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1744536153,
-        "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "18dd725c29603f582cf1900e0d25f9f1063dbf11",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_9": {
-      "locked": {
         "lastModified": 1751792365,
         "narHash": "sha256-J1kI6oAj25IG4EdVlg2hQz8NZTBNYvIS0l4wpr9KcUo=",
         "owner": "NixOS",
@@ -639,11 +621,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1754760849,
-        "narHash": "sha256-WldOcR9uVOTy5qLabMXFf3yQMU2wMfwp23XN3n8kTyg=",
+        "lastModified": 1754768725,
+        "narHash": "sha256-6EGDkweZt1GZqj6Ap6mstxx8N4FloYGDR3JzFHYrQAY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "9ec75608a46173f0c73ac27f6072b33ea4dcab4e",
+        "rev": "9a67b7a39f21aa43c4b2eab787bb3801a96a7e0a",
         "type": "github"
       },
       "original": {
@@ -726,7 +708,6 @@
     "root": {
       "inputs": {
         "arkenfox-nixos": "arkenfox-nixos",
-        "base16": "base16",
         "base16-schemes": "base16-schemes",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
@@ -737,20 +718,22 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
         "nur": "nur",
-        "rust-overlay": "rust-overlay",
         "stylix": "stylix"
       }
     },
     "rust-overlay": {
       "inputs": {
-        "nixpkgs": "nixpkgs_8"
+        "nixpkgs": [
+          "lanzaboote",
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1754707163,
-        "narHash": "sha256-wgVgOsyJUDn2ZRpzu2gELKALoJXlBSoZJSln+Tlg5Pw=",
+        "lastModified": 1754189623,
+        "narHash": "sha256-fstu5eb30UYwsxow0aQqkzxNxGn80UZjyehQVNVHuBk=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "ac39ab4c8ed7cefe48d5ae5750f864422df58f01",
+        "rev": "c582ff7f0d8a7ea689ae836dfb1773f1814f472a",
         "type": "github"
       },
       "original": {
@@ -761,16 +744,14 @@
     },
     "stylix": {
       "inputs": {
-        "base16": [
-          "base16"
-        ],
+        "base16": "base16",
         "base16-fish": "base16-fish",
         "base16-helix": "base16-helix",
         "base16-vim": "base16-vim",
         "firefox-gnome-theme": "firefox-gnome-theme",
         "flake-parts": "flake-parts_3",
         "gnome-shell": "gnome-shell",
-        "nixpkgs": "nixpkgs_9",
+        "nixpkgs": "nixpkgs_8",
         "nur": "nur_2",
         "systems": "systems_2",
         "tinted-foot": "tinted-foot",
